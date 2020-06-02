@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -46,7 +46,8 @@
         icon
         @click.stop="fixed = !fixed"
       >
-        <v-icon>mdi-minus</v-icon>
+        <v-icon v-if="!themeMod" @click="changeThemeMod">mdi-white-balance-sunny</v-icon>
+        <v-icon v-else @click="changeThemeMod">mdi-weather-night </v-icon>
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
@@ -95,10 +96,11 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
+      themeMod: false,
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'Full Example',
           to: '/'
         },
         {
@@ -110,8 +112,14 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'vue-file-uploader'
     }
-  }
+  },
+  methods: {
+    changeThemeMod (){
+      this.themeMod = !this.themeMod;
+      this.$vuetify.theme.dark= this.themeMod;
+    }
+  },
 }
 </script>
