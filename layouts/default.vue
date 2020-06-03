@@ -28,6 +28,7 @@
       :clipped-left="clipped"
       fixed
       app
+      color="white"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-btn
@@ -51,40 +52,25 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
+      <v-btn text>
+        Documentation
       </v-btn>
+
+      <v-btn link="https://github.com/alijahanpak/vue-file-uploader" text>
+        Github
+      </v-btn>
+
     </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer
       :fixed="fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ new Date().getFullYear() }} - MIT License</span>
     </v-footer>
   </v-app>
 </template>
@@ -99,14 +85,19 @@ export default {
       themeMod: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Full Example',
+          icon: 'mdi-image-plus',
+          title: 'Thumbnail File uploader',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-file-upload',
+          title: 'Simple File Uploader',
+          to: '/simple'
+        },
+        {
+          icon: 'mdi-table',
+          title: 'Table File Uploader',
+          to: '/table'
         }
       ],
       miniVariant: false,

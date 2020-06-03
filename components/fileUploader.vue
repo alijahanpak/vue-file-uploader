@@ -4,7 +4,7 @@
       <v-col cols="12" md="12" xs="12" class="BYekan">
         <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> Insert File </v-btn>
         <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
-        <v-row v-if="!thumbnail">
+        <v-row v-if="fileUploaderType === 'fileExplorer'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-hover>
               <template v-slot:default="{ hover }">
@@ -86,7 +86,7 @@
             </v-hover>
           </v-col>
         </v-row>
-        <v-row v-if="thumbnail">
+        <v-row v-if="fileUploaderType === 'thumbnail'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-card
               class="mx-auto"
@@ -120,6 +120,11 @@
                   <v-icon right>mdi-harddisk</v-icon>
                 </v-chip>
               </v-card-subtitle>
+              <v-divider
+                class="mx-4"
+                :inset="inset"
+              ></v-divider>
+              <v-spacer></v-spacer>
               <v-card-actions>
                 <v-btn text @click="openDeleteDialog(index , '')" >Delete</v-btn>
                 <v-spacer></v-spacer>
@@ -239,9 +244,9 @@
         Default: 5120,
       },
       /**
-       * Enable/Disable thumbnail for File Explore
+       * choose File Uploader Type
        */
-      thumbnail: Boolean
+      fileUploaderType: String
 
     },
     model: {
