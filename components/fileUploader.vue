@@ -1,10 +1,30 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="12" xs="12" class="BYekan">
-        <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> Insert File </v-btn>
-        <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
-        <v-row v-if="fileUploaderType === 'fileExplorer'">
+      <v-col cols="12" md="12" xs="12">
+        <template v-if="badgeCounter">
+          <template v-if="_documentAttachment.length > 0">
+            <v-badge
+              v-if="_documentAttachment.length > 0"
+              bordered
+              color="success"
+              overlap
+              :content="_documentAttachment.length"
+            >
+              <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> Insert File </v-btn>
+              <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
+            </v-badge>
+          </template>
+          <template v-else>
+            <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> Insert File </v-btn>
+            <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
+          </template>
+        </template>
+        <template v-if="!badgeCounter">
+          <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> Insert File </v-btn>
+          <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
+        </template>
+        <v-row v-if="fileUploaderType === 'simple'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-hover>
               <template v-slot:default="{ hover }">
@@ -86,9 +106,10 @@
             </v-hover>
           </v-col>
         </v-row>
-        <v-row v-if="fileUploaderType === 'thumbnail'">
+        <v-row v-else-if="fileUploaderType === 'thumbnail'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-card
+              :shaped="true"
               class="mx-auto"
               max-width="344"
             >
@@ -241,13 +262,27 @@
        */
       maxFileSize: {
         type: Number,
-        Default: 5120,
+        default: 5120,
       },
       /**
        * choose File Uploader Type
        */
-      fileUploaderType: String
-
+      fileUploaderType: String,
+      /**
+       * Maximum file Upload
+       */
+      maxFileCount:{
+        type: Number,
+        default: 0
+      },
+      /**
+       * choose File Uploader Card Type
+       */
+      cardType: String,
+      /**
+       * Badge file counter state
+       */
+      badgeCounter: Boolean,
     },
     model: {
       prop: 'documentAttachment',
@@ -286,7 +321,6 @@
 
     },
     created(){
-
     },
     destroyed(){
       this.registryDocFile= [];
@@ -317,55 +351,62 @@
       async uploadFieldChange (){
         this.btnLoader= true;
         for(let item of this.tempAttachment){
-          if((item.size / 1000).toFixed(1) > this.maxFileSize){
-            this.fileUploaderSnackBarAlertColor= 'red';
-            this.fileUploaderSnackText= `Max file size is ${Math.round(this.maxFileSize / 1024)} MB`
-            this.fileUploaderSnackBarAlert= true;
-          }
-          else{
-            let tempFile= {};
-            let file = {};
-            try {
-              const fileContents = await this.handleUpload(item);
-              this.readerFile = fileContents;
-            } catch (e) {
-            }
-            let fullFileType= this.readerFile.split(";");
-            let fileType= fullFileType[0].split(":")
-            let status = false;
-            let imgFile= ''
-            let sizeInKb=0;
-            if(fileType[1] === "image/png" || fileType[1] === "image/jpg" || fileType[1] === "image/jpeg" || fileType[1] === "application/octet-stream"){
-              status = true;
-              imgFile = await this.compressImage(this.readerFile, fileType[1]);
-            }
-            tempFile.subject= item.name;
-            let strTemp= this.readerFile.split(",")
-            if(status){
-              let imgTemp= imgFile.split(",")
-              tempFile.binary=imgTemp[1];
-              sizeInKb= new Buffer(imgFile, 'base64').length;
-              tempFile.size= String(sizeInKb);
+          if(this._documentAttachment.length < this.maxFileCount) {
+            if((item.size / 1000).toFixed(1) > this.maxFileSize){
+              this.fileUploaderSnackBarAlertColor= 'red';
+              this.fileUploaderSnackText= `Max file size is ${Math.round(this.maxFileSize / 1024)} MB`
+              this.fileUploaderSnackBarAlert= true;
             }
             else{
-              tempFile.binary=strTemp[1];
-              tempFile.size= String(item.size);
+              let tempFile= {};
+              let file = {};
+              try {
+                const fileContents = await this.handleUpload(item);
+                this.readerFile = fileContents;
+              } catch (e) {
+              }
+              let fullFileType= this.readerFile.split(";");
+              let fileType= fullFileType[0].split(":")
+              let status = false;
+              let imgFile= ''
+              let sizeInKb=0;
+              if(fileType[1] === "image/png" || fileType[1] === "image/jpg" || fileType[1] === "image/jpeg" || fileType[1] === "application/octet-stream"){
+                status = true;
+                imgFile = await this.compressImage(this.readerFile, fileType[1]);
+              }
+              tempFile.subject= item.name;
+              let strTemp= this.readerFile.split(",")
+              if(status){
+                let imgTemp= imgFile.split(",")
+                tempFile.binary=imgTemp[1];
+                sizeInKb= new Buffer(imgFile, 'base64').length;
+                tempFile.size= String(sizeInKb);
+              }
+              else{
+                tempFile.binary=strTemp[1];
+                tempFile.size= String(item.size);
+              }
+              tempFile.name= item.name;
+              //tempFile.format= item.name.split('.').pop().toLowerCase();
+              tempFile.format= strTemp[0].replace('data:' ,'');
+              file.file=tempFile;
+              this.registryDocFile.push(file);
+              /**
+               * Send updated array to parent and show new details
+               * this Event call if state = 'INSERT'
+               * @property {array} newValue new value set
+               */
+              console.log(JSON.stringify(this.registryDocFile));
+              this.$emit('setDocumentAttachment' , this.registryDocFile);
+              this._documentAttachment= this.registryDocFile;
+              if(this.state === 'UPDATE')
+                this.documentAttachmentAPI.push(file);
             }
-            tempFile.name= item.name;
-            //tempFile.format= item.name.split('.').pop().toLowerCase();
-            tempFile.format= strTemp[0].replace('data:' ,'');
-            file.file=tempFile;
-            this.registryDocFile.push(file);
-            /**
-             * Send updated array to parent and show new details
-             * this Event call if state = 'INSERT'
-             * @property {array} newValue new value set
-             */
-            console.log(JSON.stringify(this.registryDocFile));
-            this.$emit('setDocumentAttachment' , this.registryDocFile);
-            this._documentAttachment= this.registryDocFile;
-            if(this.state === 'UPDATE')
-              this.documentAttachmentAPI.push(file);
+          }
+          else {
+            this.fileUploaderSnackBarAlertColor= 'red';
+            this.fileUploaderSnackText= `Max file Count is ${this.maxFileCount}`
+            this.fileUploaderSnackBarAlert= true;
           }
         }
         //console.log('FILE =>>>>' +JSON.stringify(this.documentAttachmentAPI));

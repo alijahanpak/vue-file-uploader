@@ -19,7 +19,9 @@
           v-model:documentAttachment="registryDocFile"
           :state="'INSERT'"
           :maxFileSize= "12120"
-          :fileUploadertype= "fileUploaderType"
+          :fileUploaderType= "'simple'"
+          :maxFileCount="5"
+          :cardType="'outline'"
           ref="registryDocForm"
         >
         </file-uploader>

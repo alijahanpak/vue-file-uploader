@@ -19,7 +19,10 @@
           v-model:documentAttachment="registryDocFile"
           :state="'INSERT'"
           :maxFileSize= "12120"
-          :fileUploadertype= "fileUploaderType"
+          :fileUploaderType= "'thumbnail'"
+          :maxFileCount="5"
+          :cardType= "'outline'"
+          :badgeCounter= "true"
           ref="registryDocForm"
         >
         </file-uploader>
@@ -31,22 +34,13 @@
       max-width="80%"
     >
       <v-card>
-        <v-card-title class="headline">You can customize your File-Uploader</v-card-title>
+        <v-card-title class="headline">You can customize your Thumbnail File Uploader</v-card-title>
 
         <v-card-text>
-          <p>Fil uploader type: </p>
-          <v-chip-group
-            v-model="fileUploaderTypeSelect"
-            active-class="deep-purple accent-4 white--text"
-            column
-          >
-            <v-chip @click="fileUploadertype = 'thumbnail'">File explorer - with thumbnail</v-chip>
-
-            <v-chip @click="fileUploadertype = 'fileExplorer'">File Explorer - Simple</v-chip>
-
-            <v-chip @click="fileUploadertype = 'table'">Table</v-chip>
-
-          </v-chip-group>
+          <p>Maximum file upload: </p>
+          <v-text-field>
+            label="Maximum file upload"
+          </v-text-field>
         </v-card-text>
 
         <v-card-actions>
@@ -83,8 +77,6 @@ export default {
   data: () => ({
     registryDocFile: [],
     optionDialog: false,
-    fileUploaderTypeSelect: 0,
-    fileUploaderType: 'thumbnail',
   }),
   methods:{
     setRegistryDocFile(item){

@@ -21,6 +21,7 @@
               label
               text-color="white"
               @click="optionDialog = true"
+              to="/thumbnail"
             >
               <v-icon left>mdi-image-plus</v-icon>
               Thumbnail File Uploader
@@ -33,6 +34,7 @@
               label
               text-color="white"
               @click="optionDialog = true"
+              to="/simple"
             >
               <v-icon left>mdi-file-upload</v-icon>
               Simple File Uploader

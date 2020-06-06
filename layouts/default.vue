@@ -56,7 +56,7 @@
         Documentation
       </v-btn>
 
-      <v-btn link="https://github.com/alijahanpak/vue-file-uploader" text>
+      <v-btn href="https://github.com/alijahanpak/vue-file-uploader" target="_blank" text>
         Github
       </v-btn>
 
@@ -87,7 +87,7 @@ export default {
         {
           icon: 'mdi-image-plus',
           title: 'Thumbnail File uploader',
-          to: '/'
+          to: '/thumbnail'
         },
         {
           icon: 'mdi-file-upload',
