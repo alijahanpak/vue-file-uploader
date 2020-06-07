@@ -5,9 +5,8 @@
         <template v-if="badgeCounter">
           <template v-if="_documentAttachment.length > 0">
             <v-badge
-              v-if="_documentAttachment.length > 0"
               bordered
-              color="success"
+              :color="_documentAttachment.length === maxFileCount ? 'error' : 'success'"
               overlap
               :content="_documentAttachment.length"
             >
@@ -109,7 +108,10 @@
         <v-row v-else-if="fileUploaderType === 'thumbnail'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-card
-              :shaped="true"
+              :shaped="shaped"
+              :outlined="outlined"
+              :raised="raised"
+              :tile="tile"
               class="mx-auto"
               max-width="344"
             >
@@ -143,7 +145,6 @@
               </v-card-subtitle>
               <v-divider
                 class="mx-4"
-                :inset="inset"
               ></v-divider>
               <v-spacer></v-spacer>
               <v-card-actions>
@@ -283,7 +284,13 @@
        * Badge file counter state
        */
       badgeCounter: Boolean,
+
+      /**
+       * Enable / Disable image compressor
+       */
+      imageCompressor: Boolean,
     },
+
     model: {
       prop: 'documentAttachment',
       event: 'documentAttachmentChange'
@@ -303,8 +310,27 @@
       selectedIndex: '',
       selectedId: '',
       returnedRecord: {},
+      //Card Theme
+      outlined: false,
+      raised: false,
+      shaped: false,
+      tile: false,
     }),
     watch: {
+      cardType : function(val) {
+        this.$emit('update:cardType', this.cardType);
+        this.setCardTheme();
+      },
+      badgeCounter : function(val) {
+        this.$emit('update:badgeCounter', this.badgeCounter);
+      },
+      maxFileCount : function(val) {
+        this.$emit('update:maxFileCount', this.maxFileCount);
+      },
+      maxFileSize : function(val) {
+        alert(this.maxFileSize);
+        this.$emit('update:maxFileSize', this.maxFileSize);
+      },
 
     },
     computed: {
@@ -320,12 +346,48 @@
     mounted () {
 
     },
+
     created(){
+      this.setCardTheme();
     },
     destroyed(){
       this.registryDocFile= [];
     },
     methods: {
+      setCardTheme (){
+        switch (this.cardType) {
+          case 'default':
+            this.outlined= false;
+            this.raised= false;
+            this.shaped= false;
+            this.tile= false;
+            break;
+          case 'outlined':
+            this.outlined= true;
+            this.raised= false;
+            this.shaped= false;
+            this.tile= false;
+            break;
+          case 'shaped':
+            this.shaped= true;
+            this.raised= false;
+            this.outlined= false;
+            this.tile= false;
+            break;
+          case 'raised':
+            this.raised= true;
+            this.shaped= false;
+            this.outlined= false;
+            this.tile= false;
+            break;
+          case 'tile':
+            this.tile= true;
+            this.shaped= false;
+            this.outlined= false;
+            this.raised= false;
+            break;
+        }
+      },
       openInputDocumentModal(){
         this.btnLoader= false;
         this.tempAttachment= [];
@@ -354,7 +416,7 @@
           if(this._documentAttachment.length < this.maxFileCount) {
             if((item.size / 1000).toFixed(1) > this.maxFileSize){
               this.fileUploaderSnackBarAlertColor= 'red';
-              this.fileUploaderSnackText= `Max file size is ${Math.round(this.maxFileSize / 1024)} MB`
+              this.fileUploaderSnackText= `Max file size is ${Math.round(this.maxFileSize / 1024)} MB`;
               this.fileUploaderSnackBarAlert= true;
             }
             else{
@@ -396,7 +458,7 @@
                * this Event call if state = 'INSERT'
                * @property {array} newValue new value set
                */
-              console.log(JSON.stringify(this.registryDocFile));
+              //console.log(JSON.stringify(this.registryDocFile));
               this.$emit('setDocumentAttachment' , this.registryDocFile);
               this._documentAttachment= this.registryDocFile;
               if(this.state === 'UPDATE')
@@ -551,13 +613,12 @@
         window.open(process.env.apiBaseUrl +fileUrl );
       },
 
-      destroyElement(){
+      destroyFileUploader(){
         this.documentAttachmentAPI = [];
         this._documentAttachment = [];
         this.registryDocFile= [];
         this.tempAttachment = [];
       },
-
     },
   };
 </script>

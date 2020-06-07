@@ -21,7 +21,8 @@
           :maxFileSize= "12120"
           :fileUploaderType= "'simple'"
           :maxFileCount="5"
-          :cardType="'outline'"
+          :cardType= "'outline'"
+          :badgeCounter= "true"
           ref="registryDocForm"
         >
         </file-uploader>
