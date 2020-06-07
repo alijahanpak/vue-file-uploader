@@ -120,7 +120,7 @@
                 height="200px"
               ></v-img>
 
-              <v-card-subtitle>
+              <v-card-subtitle style="height: 70px">
                 {{attachment.file.name}}
               </v-card-subtitle>
               <v-card-subtitle v-if="Number((attachment.file.size / 1000).toFixed(1)) < 1024" class="mt2">
@@ -272,7 +272,7 @@
       /**
        * Maximum file Upload
        */
-      maxFileCount:{
+      maxFileCount: {
         type: Number,
         default: 0
       },
@@ -284,11 +284,17 @@
        * Badge file counter state
        */
       badgeCounter: Boolean,
-
       /**
        * Enable / Disable image compressor
        */
       imageCompressor: Boolean,
+      /**
+       * Image compress level (0 to 1)
+       */
+      imageCompressLevel: {
+        type: Number,
+        default: 0.5
+      },
     },
 
     model: {
@@ -328,8 +334,13 @@
         this.$emit('update:maxFileCount', this.maxFileCount);
       },
       maxFileSize : function(val) {
-        alert(this.maxFileSize);
-        this.$emit('update:maxFileSize', this.maxFileSize);
+        this.$emit('update:maxFileSize', Number(this.maxFileSize));
+      },
+      imageCompressor : function(val) {
+        this.$emit('update:imageCompressor', this.imageCompressor);
+      },
+      imageCompressLevel : function(val) {
+        this.$emit('update:imageCompressLevel', this.imageCompressLevel);
       },
 
     },
@@ -432,9 +443,11 @@
               let status = false;
               let imgFile= ''
               let sizeInKb=0;
-              if(fileType[1] === "image/png" || fileType[1] === "image/jpg" || fileType[1] === "image/jpeg" || fileType[1] === "application/octet-stream"){
-                status = true;
-                imgFile = await this.compressImage(this.readerFile, fileType[1]);
+              if(this.imageCompressor){
+                if(fileType[1] === "image/png" || fileType[1] === "image/jpg" || fileType[1] === "image/jpeg" || fileType[1] === "application/octet-stream"){
+                  status = true;
+                  imgFile = await this.compressImage(this.readerFile, fileType[1]);
+                }
               }
               tempFile.subject= item.name;
               let strTemp= this.readerFile.split(",")
@@ -520,6 +533,7 @@
         const img = document.createElement('img')
 
         return new Promise((resolve, reject) => {
+          let imageCompressLevelTemp= this.imageCompressLevel;
           img.onload = function () {
             let width = img.width
             let height = img.height
@@ -543,7 +557,7 @@
             const ctx = canvas.getContext('2d')
             ctx.drawImage(img, 0, 0, width, height)
 
-            resolve(canvas.toDataURL('image/jpeg', 0.3))
+            resolve(canvas.toDataURL('image/jpeg', imageCompressLevelTemp))
           }
           img.onerror = function (err) {
             reject(err)

@@ -20,6 +20,7 @@
           :state="'INSERT'"
           :maxFileSize.sync= "maxFileSizeChange"
           :imageCompressor.sync= "imageCompressorState"
+          :imageCompressLevel.sync= "imageCompressLevelChange"
           :fileUploaderType= "'thumbnail'"
           :maxFileCount.sync="maxFileCountChange"
           :cardType.sync= "cardType"
@@ -80,10 +81,12 @@
               </v-col>
               <v-col cols="9" md="9" xs="12">
                 <v-slider style="margin-top: 16px;"
-                  v-model="imageQuality"
-                  label="Image compress quality"
+                  :disabled="!imageCompressorState"
+                  v-model="imageCompressLevelChange"
+                  label="Image compress level"
                   persistent-hint
-                  step="10"
+                  max="1"
+                  step="0.1"
                   thumb-label="always"
                   ticks
                 ></v-slider>
@@ -130,7 +133,7 @@ export default {
     maxFileCountChange: 5,
     maxFileSizeChange: 5120,
     imageCompressorState: true,
-    imageQuality: 5,
+    imageCompressLevelChange: 0.5,
   }),
   watch: {
     selectedCardType: function (val) {
@@ -143,7 +146,13 @@ export default {
         this.maxFileCount = this.maxFileCountChange;
     },
     maxFileSizeChange : function (val) {
-        this.maxFileSize = this.maxFileSizeChange;
+        this.maxFileSize = Number(this.maxFileSizeChange);
+    },
+    imageCompressorState : function (val) {
+      this.imageCompressor = this.imageCompressorState;
+    },
+    imageCompressLevelChange : function (val) {
+      this.imageCompressLevel = this.imageCompressLevelChange;
     },
   },
   methods:{
