@@ -321,14 +321,13 @@
         this.$emit('update:cardType', this.cardType);
         this.setCardTheme();
       },
-      badgeCounter : function(val) {
+      badgeCounter : function() {
         this.$emit('update:badgeCounter', this.badgeCounter);
       },
-      maxFileCount : function(val) {
+      maxFileCount : function() {
         this.$emit('update:maxFileCount', this.maxFileCount);
       },
-      maxFileSize : function(val) {
-        alert(this.maxFileSize);
+      maxFileSize : function() {
         this.$emit('update:maxFileSize', this.maxFileSize);
       },
 

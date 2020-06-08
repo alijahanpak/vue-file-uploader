@@ -20,6 +20,7 @@
           :state="'INSERT'"
           :maxFileSize.sync= "maxFileSizeChange"
           :imageCompressor.sync= "imageCompressorState"
+          :imageCompressorQuality.sync= "imageCompressorChange"
           :fileUploaderType= "'thumbnail'"
           :maxFileCount.sync="maxFileCountChange"
           :cardType.sync= "cardType"
@@ -131,6 +132,7 @@ export default {
     maxFileSizeChange: 5120,
     imageCompressorState: true,
     imageQuality: 5,
+    imageCompressorChange: 0.5,
   }),
   watch: {
     selectedCardType: function (val) {
