@@ -20,7 +20,6 @@
               color="green darken-1"
               label
               text-color="white"
-              @click="optionDialog = true"
               to="/thumbnail"
             >
               <v-icon left>mdi-image-plus</v-icon>
@@ -33,7 +32,6 @@
               color="green darken-1"
               label
               text-color="white"
-              @click="optionDialog = true"
               to="/simple"
             >
               <v-icon left>mdi-file-upload</v-icon>
@@ -46,7 +44,7 @@
               color="green darken-1"
               label
               text-color="white"
-              @click="optionDialog = true"
+              to="/table"
             >
               <v-icon left>mdi-table</v-icon>
               Table File Uploader

@@ -18,13 +18,15 @@
           :setDocumentAttachment="setInsertedFile"
           v-model:documentAttachment="registryDocFile"
           :state="'INSERT'"
+          :fileAccept="fileExtensions"
           :maxFileSize.sync= "maxFileSizeChange"
           :imageCompressor.sync= "imageCompressorState"
-          :imageCompressorQuality.sync= "imageCompressorChange"
+          :imageCompressLevel.sync= "imageCompressLevelChange"
           :fileUploaderType= "'thumbnail'"
           :maxFileCount.sync="maxFileCountChange"
           :cardType.sync= "cardType"
           :badgeCounter.sync= "badgeCounterState"
+          :lang= "setLang"
           ref="fileUploader"
         >
         </file-uploader>
@@ -44,6 +46,24 @@
               <v-col cols="12" md="12" xs="12">
                 <p>Select card type: </p>
                 <v-chip-group
+                  v-model="selectedLanguage"
+                  active-class="deep-purple accent-4 white--text"
+                  column
+                >
+                  <v-chip>English</v-chip>
+
+                  <v-chip>Persian</v-chip>
+
+                  <v-chip>French</v-chip>
+
+                  <v-chip>Chines</v-chip>
+
+                  <v-chip>Arabic</v-chip>
+                </v-chip-group>
+              </v-col>
+              <v-col cols="12" md="12" xs="12">
+                <p>Select Language: </p>
+                <v-chip-group
                   v-model="selectedCardType"
                   active-class="deep-purple accent-4 white--text"
                   column
@@ -58,6 +78,13 @@
 
                   <v-chip>TILE</v-chip>
                 </v-chip-group>
+              </v-col>
+              <v-col cols="12" md="12" xs="12">
+                <v-text-field
+                  v-model="fileExtensions"
+                  label="File extensions"
+                >
+                </v-text-field>
               </v-col>
               <v-col cols="12" md="6" xs="12">
                 <v-text-field
@@ -81,10 +108,12 @@
               </v-col>
               <v-col cols="9" md="9" xs="12">
                 <v-slider style="margin-top: 16px;"
-                  v-model="imageQuality"
-                  label="Image compress quality"
+                  :disabled="!imageCompressorState"
+                  v-model="imageCompressLevelChange"
+                  label="Image compress level"
                   persistent-hint
-                  step="10"
+                  max="1"
+                  step="0.1"
                   thumb-label="always"
                   ticks
                 ></v-slider>
@@ -131,8 +160,11 @@ export default {
     maxFileCountChange: 5,
     maxFileSizeChange: 5120,
     imageCompressorState: true,
-    imageQuality: 5,
     imageCompressorChange: 0.5,
+    imageCompressLevelChange: 0.5,
+    fileExtensions: 'image/png,image/gif,image/jpeg,image/webp',
+    selectedLanguage: 0,
+    setLang: 'en',
   }),
   watch: {
     selectedCardType: function (val) {
@@ -145,15 +177,24 @@ export default {
         this.maxFileCount = this.maxFileCountChange;
     },
     maxFileSizeChange : function (val) {
-        this.maxFileSize = this.maxFileSizeChange;
+        this.maxFileSize = Number(this.maxFileSizeChange);
+    },
+    imageCompressorState : function (val) {
+      this.imageCompressor = this.imageCompressorState;
+    },
+    imageCompressLevelChange : function (val) {
+      this.imageCompressLevel = this.imageCompressLevelChange;
+    },
+    fileExtensions : function (val) {
+      this.fileAccept = this.fileExtensions;
+    },
+    selectedLanguage: function (val) {
+      this.setLanguage()
     },
   },
   methods:{
     setInsertedFile(item){
       this.registryDocFile = item;
-    },
-    openOptions() {
-
     },
 
     setCardType(){
@@ -174,7 +215,25 @@ export default {
           this.cardType = 'tile'
           break;
       }
-      //this.$refs.fileUploader.setCardTheme();
+    },
+    setLanguage(){
+      switch (this.selectedLanguage) {
+        case 0 :
+          this.setLang = 'en'
+          break;
+        case 1 :
+          this.setLang = 'fa'
+          break;
+        case 2 :
+          this.setLang = 'fr'
+          break;
+        case 3 :
+          this.setLang = 'ch'
+          break;
+        case 4 :
+          this.setLang = 'ar'
+          break;
+      }
     },
   },
 }
