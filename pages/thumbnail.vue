@@ -2,16 +2,19 @@
   <v-container>
     <v-row>
       <v-col cols="12" lg="12" md="12" xs="12">
-        <v-chip
+        <div class="text-center">
+          <p style="color: #757575; font-size: 1.5rem">Thumbnail file uploader example</p>
+          <v-chip
           class="ma-2"
           color="pink"
           label
           text-color="white"
           @click="optionDialog = true"
-        >
+          >
           <v-icon left>mdi-cog-outline</v-icon>
           Options
-        </v-chip>
+          </v-chip>
+        </div>
       </v-col>
       <v-col cols="12" lg="12" md="12" xs="12">
         <file-uploader
@@ -26,7 +29,7 @@
           :maxFileCount.sync="maxFileCountChange"
           :cardType.sync= "cardType"
           :badgeCounter.sync= "badgeCounterState"
-          :lang= "setLang"
+          :lang.sync= "setLang"
           ref="fileUploader"
         >
         </file-uploader>
@@ -44,7 +47,7 @@
           <v-container>
             <v-row>
               <v-col cols="12" md="12" xs="12">
-                <p>Select card type: </p>
+                <p>Select Language: </p>
                 <v-chip-group
                   v-model="selectedLanguage"
                   active-class="deep-purple accent-4 white--text"
@@ -62,7 +65,7 @@
                 </v-chip-group>
               </v-col>
               <v-col cols="12" md="12" xs="12">
-                <p>Select Language: </p>
+                <p>Select card type: </p>
                 <v-chip-group
                   v-model="selectedCardType"
                   active-class="deep-purple accent-4 white--text"

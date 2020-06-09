@@ -20,7 +20,9 @@ export default{
     size:{
       kb: 'KB',
       mb: 'MB',
-    }
+    },
+    maxFileSizeAlert: 'Max file Size is',
+    maxFileCountAlert: 'Max file Count is',
   },
   fa:{
     insertFile: 'افزودن فایل',
@@ -43,7 +45,9 @@ export default{
     size:{
       kb: 'کیلو بایت',
       mb: 'مگابایت'
-    }
+    },
+    maxSizeAlert: 'حداکثر حجم فایل انتحابی ',
+    maxFileCountAlert: 'حداکثر تعداد فایل انتخابی',
   },
   fr:{
     insertFile: 'Insérer un fichier',
@@ -66,7 +70,9 @@ export default{
     size:{
       kb: 'KB',
       mb: 'MB',
-    }
+    },
+    maxSizeAlert: 'La taille maximale du fichier est',
+    maxFileCountAlert: 'Le nombre maximal de fichiers est',
   },
   ch:{
     insertFile: '插入档案',
@@ -89,7 +95,9 @@ export default{
     size:{
       kb: 'KB',
       mb: 'MB',
-    }
+    },
+    maxSizeAlert: '档案大小上限为',
+    maxFileCountAlert: '现“最大文件数”为',
   },
   ar:{
     insertFile: 'إدراج ملف',
@@ -112,6 +120,8 @@ export default{
     size:{
       kb: 'KB',
       mb: 'MB',
-    }
+    },
+    maxSizeAlert: 'الحجم الأقصى للملف هو',
+    maxFileCountAlert: 'الحد الأقصى لعدد الملفات هو',
   },
 }

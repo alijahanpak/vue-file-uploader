@@ -2,16 +2,19 @@
   <v-container>
     <v-row>
       <v-col cols="12" lg="12" md="12" xs="12">
-        <v-chip
-          class="ma-2"
-          color="pink"
-          label
-          text-color="white"
-          @click="optionDialog = true"
-        >
-          <v-icon left>mdi-cog-outline</v-icon>
-          Options
-        </v-chip>
+        <div class="text-center">
+          <p style="color: #757575; font-size: 1.5rem">Table file uploader example</p>
+          <v-chip
+            class="ma-2"
+            color="pink"
+            label
+            text-color="white"
+            @click="optionDialog = true"
+          >
+            <v-icon left>mdi-cog-outline</v-icon>
+            Options
+          </v-chip>
+        </div>
       </v-col>
       <v-col cols="12" lg="12" md="12" xs="12">
         <file-uploader
@@ -27,8 +30,10 @@
           :cardType.sync= "cardType"
           :badgeCounter.sync= "badgeCounterState"
           :thumb.sync= "thumbState"
+          :tableFixedHeader.sync= "tableFixedHeaderStatus"
+          :tableHeight.sync= "tableHeightChange"
           :tableThumbColumn.sync= "tableThumbColumnState"
-          :lang= "'fa'"
+          :lang.sync= "setLang"
           ref="fileUploader"
         >
         </file-uploader>
@@ -40,11 +45,42 @@
       max-width="80%"
     >
       <v-card>
-        <v-card-title class="headline">You can customize your Thumbnail File Uploader</v-card-title>
+        <v-card-title class="headline">You can customize your Table File Uploader</v-card-title>
 
         <v-card-text>
           <v-container>
             <v-row>
+              <v-col cols="12" md="12" xs="12">
+                <p>Select Language: </p>
+                <v-chip-group
+                  v-model="selectedLanguage"
+                  active-class="deep-purple accent-4 white--text"
+                  column
+                >
+                  <v-chip>English</v-chip>
+
+                  <v-chip>Persian</v-chip>
+
+                  <v-chip>French</v-chip>
+
+                  <v-chip>Chines</v-chip>
+
+                  <v-chip>Arabic</v-chip>
+                </v-chip-group>
+              </v-col>
+              <v-col cols="12" md="12" xs="12">
+                <v-switch
+                  v-model="tableFixedHeaderStatus"
+                  :label="`Table fixed header : ${tableFixedHeaderStatus.toString()}`"
+                ></v-switch>
+              </v-col>
+              <v-col cols="12" md="6" xs="12">
+                <v-text-field
+                  v-model="tableHeightChange"
+                  label="Table height (px)"
+                >
+                </v-text-field>
+              </v-col>
               <v-col cols="12" md="12" xs="12">
                 <v-switch
                   v-model="tableThumbColumnState"
@@ -143,6 +179,10 @@
       fileExtensions: 'image/png,image/gif,image/jpeg,image/webp',
       thumbState: true,
       tableThumbColumnState: true,
+      tableFixedHeaderStatus: true,
+      tableHeightChange: 350,
+      selectedLanguage: 0,
+      setLang: 'en',
     }),
     watch: {
       selectedCardType: function (val) {
@@ -172,10 +212,38 @@
       tableThumbColumnState : function (val) {
         this.tableThumbColumn = this.tableThumbColumnState;
       },
+      tableFixedHeaderStatus : function (val) {
+        this.tableFixedHeader = this.tableFixedHeaderStatus;
+      },
+      tableHeightChange : function (val) {
+        this.tableHeight = this.tableHeightChange;
+      },
+      selectedLanguage: function (val) {
+        this.setLanguage()
+      },
     },
     methods:{
       setInsertedFile(item){
         this.registryDocFile = item;
+      },
+      setLanguage() {
+        switch (this.selectedLanguage) {
+          case 0 :
+            this.setLang = 'en'
+            break;
+          case 1 :
+            this.setLang = 'fa'
+            break;
+          case 2 :
+            this.setLang = 'fr'
+            break;
+          case 3 :
+            this.setLang = 'ch'
+            break;
+          case 4 :
+            this.setLang = 'ar'
+            break;
+        }
       },
     },
   }

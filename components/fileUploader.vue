@@ -57,7 +57,14 @@
                       size="80"
                       color="blue-grey lighten-5"
                     >
-                      <template>
+                      <template v-if="attachment.file.name.split('.').pop().toLowerCase() == 'jpg' || attachment.file.name.split('.').pop().toLowerCase() == 'jpeg' || attachment.file.name.split('.').pop().toLowerCase() == 'png' || attachment.file.name.split('.').pop().toLowerCase() == 'tif' || attachment.file.name.split('.').pop().toLowerCase() == 'bmp'">
+                        <v-img
+                          v-if="thumb"
+                          :src="'data:'+ attachment.file.format  + ',' + attachment.file.binary "
+                        ></v-img>
+                        <v-icon v-else  style="margin-left: 10px" size="50" file-word-outline color="deep-purple darken-1">mdi-file-image-outline</v-icon>
+                      </template>
+                      <template v-else>
                         <v-icon  v-if="attachment.file.name.split('.').pop().toLowerCase() == 'pdf'" x-large file-word-outline color="red darken-1">mdi-file-pdf-outline</v-icon>
                         <v-icon  v-else-if="attachment.file.name.split('.').pop().toLowerCase() == 'doc' || attachment.file.name.split('.').pop().toLowerCase() == 'docx' || attachment.file.name.split('.').pop().toLowerCase() == 'odt'" x-large file-word-outline color="blue darken-1">mdi-file-word-outline</v-icon>
                         <v-icon  v-else-if="attachment.file.name.split('.').pop().toLowerCase() == 'jpg' || attachment.file.name.split('.').pop().toLowerCase() == 'jpeg' || attachment.file.name.split('.').pop().toLowerCase() == 'png' || attachment.file.name.split('.').pop().toLowerCase() == 'tif' || attachment.file.name.split('.').pop().toLowerCase() == 'bmp'" x-large file-word-outline color="deep-purple darken-1">mdi-file-image-outline</v-icon>
@@ -182,13 +189,13 @@
         </v-row>
         <v-row v-if="fileUploaderType === 'table'">
           <v-col cols="12" lg="12" md="12" xs="12">
-            <v-simple-table fixed-header height="400px">
+            <v-simple-table :fixed-header="tableFixedHeader" :height="tableHeight + 'px'">
               <template v-slot:default>
                 <thead>
                 <tr>
                   <th v-if="tableThumbColumn" class="text-left">{{selectedLang[lang].table.thumb}}</th>
                   <th class="text-left">{{selectedLang[lang].table.name}}</th>
-                  <th class="text-left">{{selectedLang[lang].table.size.size}}</th>
+                  <th class="text-left">{{selectedLang[lang].table.size}}</th>
                   <th class="text-left">{{selectedLang[lang].table.action.action}}</th>
                 </tr>
                 </thead>
@@ -235,7 +242,7 @@
                         label
                         text-color="white"
                       >
-                        {{  Number(((attachment.file.size / 1000) / 1024 ).toFixed(1)) + selectedLang[lang].size.kb}}
+                        {{  Number(((attachment.file.size / 1000) / 1024 ).toFixed(1)) + selectedLang[lang].size.mb}}
                         <v-icon right>mdi-harddisk</v-icon>
                       </v-chip>
                     </v-card-subtitle>
@@ -408,6 +415,14 @@
        */
       tableThumbColumn: Boolean,
       /**
+       * enable / disable table fixed header
+       */
+      tableFixedHeader: Boolean,
+      /**
+       * set table height
+       */
+      tableHeight: Number,
+      /**
        * change to RTL support languages
        */
       rtlSupport: {
@@ -477,6 +492,12 @@
       },
       tableThumbColumn : function(val) {
         this.$emit('update:tableThumbColumn', this.tableThumbColumn);
+      },
+      tableFixedHeader : function(val) {
+        this.$emit('update:tableFixedHeader', this.tableFixedHeader);
+      },
+      tableHeight : function(val) {
+        this.$emit('update:tableHeight', this.tableHeight);
       },
       lang : function(val) {
         this.$emit('update:lang', this.lang);
@@ -575,7 +596,7 @@
           if(this._documentAttachment.length < this.maxFileCount) {
             if((item.size / 1000).toFixed(1) > this.maxFileSize){
               this.fileUploaderSnackBarAlertColor= 'red';
-              this.fileUploaderSnackText= `Max file size is ${Math.round(this.maxFileSize / 1024)} MB`;
+              this.fileUploaderSnackText= `${this.selectedLang[this.lang].maxFileSizeAlert} ${Math.round(this.maxFileSize / 1024)} ${this.selectedLang[this.lang].size.mb}`;
               this.fileUploaderSnackBarAlert= true;
             }
             else{
@@ -628,7 +649,7 @@
           }
           else {
             this.fileUploaderSnackBarAlertColor= 'red';
-            this.fileUploaderSnackText= `Max file Count is ${this.maxFileCount}`
+            this.fileUploaderSnackText= `${this.selectedLang[this.lang].maxFileCountAlert} ${this.maxFileCount}`
             this.fileUploaderSnackBarAlert= true;
           }
         }

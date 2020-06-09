@@ -52,17 +52,21 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn text>
+      <v-btn small to="/documentation" text>
         Documentation
       </v-btn>
 
-      <v-btn href="https://github.com/alijahanpak/vue-file-uploader" target="_blank" text>
-        Github
+      <v-btn small to="/" text>
+        Examples
+      </v-btn>
+
+      <v-btn small href="https://github.com/alijahanpak/vue-file-uploader" target="_blank" text>
+        <v-icon>mdi-github</v-icon> Github
       </v-btn>
 
     </v-app-bar>
     <v-content>
-      <v-container>
+      <v-container fluid>
         <nuxt />
       </v-container>
     </v-content>
