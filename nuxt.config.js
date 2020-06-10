@@ -37,7 +37,18 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
+    '@nuxtjs/markdownit',
   ],
+
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-div',
+      'markdown-it-attrs'
+    ]
+  },
   /*
   ** Nuxt.js modules
   */
@@ -79,6 +90,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+
     extend (config, ctx) {
     }
   }

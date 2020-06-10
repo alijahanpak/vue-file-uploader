@@ -13,7 +13,11 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.8",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/markdownit": "^1.2.9",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "markdown-it": "^11.0.0",
+    "markdown-it-attrs": "^3.0.3",
+    "markdown-it-div": "^1.1.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
