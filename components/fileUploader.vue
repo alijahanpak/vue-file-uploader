@@ -375,7 +375,10 @@
       /**
        * choose File Uploader Type
        */
-      fileUploaderType: String,
+      fileUploaderType: {
+        type: String,
+        default: 'thumbnail'
+      },
       /**
        * Maximum file Upload
        */

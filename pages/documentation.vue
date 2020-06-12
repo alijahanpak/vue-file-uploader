@@ -2,13 +2,18 @@
   <v-container fluid>
     <v-row>
       <v-col style="overflow: auto;border-right: 1px solid #E0E0E0" :style="{height: panelHeight+'px'}" cols="12" lg="2" md="2" xs="12">
-        <v-btn text small>Getting Started</v-btn>
-        <v-btn class="sub-link" text small>NPM</v-btn>
+        <v-btn text small>overview</v-btn><br>
+        <v-btn text small>Getting Started</v-btn><br>
+        <v-btn class="sub-link" text small color="grey darken-2">Install</v-btn><br>
+        <v-btn class="sub-link" text small color="grey darken-2">setup</v-btn><br>
+        <v-btn text small>props</v-btn><br>
+        <v-btn @click="$vuetify.goTo(600)" class="sub-link" text small color="grey darken-2">documentAttachment</v-btn><br>
+        <v-btn @click="$vuetify.goTo(1150)" class="sub-link" text small color="grey darken-2">fileUploaderType</v-btn><br>
+        <v-btn class="sub-link" text small color="grey darken-2">maxFileSize</v-btn><br>
       </v-col>
-      <v-col cols="12" lg="10" md="10" xs="12">
+      <v-col style="overflow: auto;" :style="{height: panelHeight+'px'}" cols="12" lg="10" md="10" xs="12">
         <p class="header">Getting Started</p>
         <v-divider></v-divider>
-        <p class="title">Install</p>
         <v-row>
           <v-col cols="12" lg="12" md="12" xs="12">
             <template>
@@ -62,5 +67,8 @@ export default {
   }
   .sub-link{
     margin-left: 10px;
+  }
+  code{
+    box-shadow: none !important;
   }
 </style>

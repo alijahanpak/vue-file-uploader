@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import hljs from 'highlight.js';
 
 export default {
   mode: 'universal',
@@ -25,6 +26,7 @@ export default {
   ** Global CSS
   */
   css: [
+    'highlight.js/styles/github.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -41,13 +43,17 @@ export default {
   ],
 
   markdownit: {
-    preset: 'default',
-    linkify: true,
-    breaks: true,
-    use: [
-      'markdown-it-div',
-      'markdown-it-attrs'
-    ]
+    highlight: function (str, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return '<pre style="margin: 20px;" class="hljs"><code style="box-shadow: none !important;background-color: #F8F8F8;padding-top: 8px;font-weight: 100;">' +
+            hljs.highlight(lang, str, true).value +
+            '</code></pre>';
+        } catch (__) {}
+      }
+
+      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+    }
   },
   /*
   ** Nuxt.js modules
