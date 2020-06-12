@@ -60,7 +60,7 @@
                       <template v-if="attachment.file.name.split('.').pop().toLowerCase() == 'jpg' || attachment.file.name.split('.').pop().toLowerCase() == 'jpeg' || attachment.file.name.split('.').pop().toLowerCase() == 'png' || attachment.file.name.split('.').pop().toLowerCase() == 'tif' || attachment.file.name.split('.').pop().toLowerCase() == 'bmp'">
                         <v-img
                           v-if="thumb"
-                          :src="'data:'+ attachment.file.format  + ',' + attachment.file.binary "
+                          :src="'data:'+ attachment.file.format  + ',' + attachment.file.base64 "
                         ></v-img>
                         <v-icon v-else  style="margin-left: 10px" size="50" file-word-outline color="deep-purple darken-1">mdi-file-image-outline</v-icon>
                       </template>
@@ -125,7 +125,7 @@
             >
               <template v-if="attachment.file.name.split('.').pop().toLowerCase() == 'jpg' || attachment.file.name.split('.').pop().toLowerCase() == 'jpeg' || attachment.file.name.split('.').pop().toLowerCase() == 'png' || attachment.file.name.split('.').pop().toLowerCase() == 'tif' || attachment.file.name.split('.').pop().toLowerCase() == 'bmp'">
               <v-img
-                :src="'data:'+ attachment.file.format  + ',' + attachment.file.binary "
+                :src="'data:'+ attachment.file.format  + ',' + attachment.file.base64 "
                 height="200px"
               ></v-img>
               </template>
@@ -206,7 +206,7 @@
                       <v-img
                         v-if="thumb"
                         style="margin: 10px"
-                        :src="'data:'+ attachment.file.format  + ',' + attachment.file.binary "
+                        :src="'data:'+ attachment.file.format  + ',' + attachment.file.base64 "
                         height="50px"
                         width="50px"
                       ></v-img>
@@ -393,7 +393,10 @@
       /**
        * Badge file counter state
        */
-      badgeCounter: Boolean,
+      badgeCounter: {
+        type: Boolean,
+        default: true
+      },
       /**
        * Enable / Disable image compressor
        */
@@ -412,28 +415,37 @@
       /**
        * show / hidden thumb for images in table and simple file uploader
        */
-      thumb: Boolean,
+      thumb: {
+        type: Boolean,
+        default: true
+      },
       /**
-       * show / hidden thumb column in table and simple file uploader
+       * show / hidden thumb column in table file uploader
        */
       tableThumbColumn: Boolean,
       /**
        * enable / disable table fixed header
        */
-      tableFixedHeader: Boolean,
+      tableFixedHeader: {
+        type: Boolean,
+        default: true
+      },
       /**
        * set table height
        */
-      tableHeight: Number,
+      tableHeight: {
+        type: Number,
+        default: 400
+      },
       /**
-       * change to RTL support languages
+       * Enable RTL support languages
        */
       rtlSupport: {
         type: Boolean,
         default: false
       },
       /**
-       * change to RTL support languages
+       * Change file uploader languages
        */
       lang: {
         type: String,
@@ -625,12 +637,12 @@
               let strTemp= this.readerFile.split(",")
               if(status){
                 let imgTemp= imgFile.split(",")
-                tempFile.binary=imgTemp[1];
+                tempFile.base64=imgTemp[1];
                 sizeInKb= new Buffer(imgFile, 'base64').length;
                 tempFile.size= String(sizeInKb);
               }
               else{
-                tempFile.binary=strTemp[1];
+                tempFile.base64=strTemp[1];
                 tempFile.size= String(item.size);
               }
               tempFile.name= item.name;
