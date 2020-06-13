@@ -109,11 +109,13 @@ export default {
     props: [
       ['documentAttachment', 620],
       ['fileUploaderType', 1180],
+      ['cardType', 1180],
       ['fileAccept', 1180],
       ['imageCompressor', 1970],
       ['imageCompressLevel', 1150],
       ['maxFileSize', 1150],
       ['maxFileCount', 1150],
+      ['cardType', 1150],
       ['thumb', 1150],
       ['tableThumbColumn', 1150],
       ['tableFixedHeader', 1150],

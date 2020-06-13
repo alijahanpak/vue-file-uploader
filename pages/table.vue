@@ -27,7 +27,6 @@
           :imageCompressLevel.sync= "imageCompressLevelChange"
           :fileUploaderType= "'table'"
           :maxFileCount.sync="maxFileCountChange"
-          :cardType.sync= "cardType"
           :badgeCounter.sync= "badgeCounterState"
           :thumb.sync= "thumbState"
           :tableFixedHeader.sync= "tableFixedHeaderStatus"

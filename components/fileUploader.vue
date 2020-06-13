@@ -27,7 +27,12 @@
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-hover>
               <template v-slot:default="{ hover }">
-                <v-card outlined>
+                <v-card
+                  :shaped="shaped"
+                  :outlined="outlined"
+                  :raised="raised"
+                  :tile="tile"
+                >
                   <v-list-item three-line>
                     <v-list-item-content>
                       <v-list-item-subtitle color="blue-grey darken-3">{{attachment.file.name}}</v-list-item-subtitle>

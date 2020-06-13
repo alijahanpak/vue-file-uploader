@@ -51,8 +51,8 @@ const VueUploadComponent = require('vue-upload-component')
 
 ``` js
 [
-    { file:
-        {
+    { 
+        file: {
             base64: 'base64', 
             size: 'file size',
             name: 'file name',
@@ -102,6 +102,31 @@ const VueUploadComponent = require('vue-upload-component')
 ---
 &nbsp;
 
+### &nbsp;&nbsp;&nbsp;&nbsp; `cardType`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Choose File Uploader Card Type Theme
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cardTypes : &nbsp;  &nbsp;`default` &nbsp;, &nbsp; &nbsp; `outlined`&nbsp;, &nbsp; &nbsp;`shaped`&nbsp;, &nbsp;&nbsp; `raised`&nbsp;, &nbsp; &nbsp;`tile`
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` String `
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; ` default `
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <file-uploader
+    :cardType= "'shaped'"
+  >
+ <file-uploader>
+ ```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
+
+
+---
+&nbsp;
+
 ### &nbsp;&nbsp;&nbsp;&nbsp; `fileAccept`
 &nbsp;
 
@@ -120,6 +145,7 @@ const VueUploadComponent = require('vue-upload-component')
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `Important: ` If don`t send fileAccept, file uploader accept all file formats.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
+
 
 
 ---
@@ -364,4 +390,73 @@ const VueUploadComponent = require('vue-upload-component')
   >
  <file-uploader>
  ```
+---
+&nbsp;
 
+# Code Examples
+&nbsp;
+### &nbsp;&nbsp;&nbsp;&nbsp; Thumbnail
+
+``` html
+<file-uploader
+    :setDocumentAttachment="setInsertedFile"
+    v-model:documentAttachment="registryDocFile"
+    :fileUploaderType= "'thumbnail'"
+    :maxFileSize= "10240"
+    :imageCompressor= "true"
+    :imageCompressLevel= "0.8"
+    :maxFileCount="10"
+    :cardType= "default"
+    :badgeCounter= "true"
+    :rtlSupport= "true"
+    :lang= "'fr'"
+    ref="fileUploader"
+>
+</file-uploader>
+```
+
+&nbsp;
+### &nbsp;&nbsp;&nbsp;&nbsp; Simple
+
+``` html
+<file-uploader
+    :setDocumentAttachment="setInsertedFile"
+    v-model:documentAttachment="registryDocFile"
+    :fileUploaderType= "'simple'"
+    :maxFileSize= "10240"
+    :imageCompressor= "true"
+    :imageCompressLevel= "0.8"
+    :maxFileCount="10"
+    :cardType= "default"
+    :badgeCounter= "true"
+    :thumb= "false"
+    :rtlSupport= "true"
+    :lang= "'fr'"
+    ref="fileUploader"
+>
+</file-uploader>
+```
+
+&nbsp;
+### &nbsp;&nbsp;&nbsp;&nbsp; Table
+
+``` html
+<file-uploader
+    :setDocumentAttachment="setInsertedFile"
+    v-model:documentAttachment="registryDocFile"
+    :fileUploaderType= "'table'"
+    :maxFileSize= "10240"
+    :imageCompressor= "true"
+    :imageCompressLevel= "0.8"
+    :maxFileCount="10"
+    :badgeCounter= "true"
+    :thumb.sync= "true"
+    :tableFixedHeader.sync= "true"
+    :tableHeight.sync= "400"
+    :tableThumbColumn.sync= "true"
+    :lang.sync= "'fr'"
+    :rtlSupport= "true"
+    ref="fileUploader"
+>
+</file-uploader>
+```

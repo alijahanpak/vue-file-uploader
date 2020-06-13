@@ -210,6 +210,27 @@ export default {
     setInsertedFile(item){
       this.registryDocFile = item;
     },
+
+    setCardType(){
+      switch (this.selectedCardType) {
+        case 0 :
+          this.cardType = 'default'
+          break;
+        case 1 :
+          this.cardType = 'outlined'
+          break;
+        case 2 :
+          this.cardType = 'raised'
+          break;
+        case 3 :
+          this.cardType = 'shaped'
+          break;
+        case 4 :
+          this.cardType = 'tile'
+          break;
+      }
+    },
+
     setLanguage(){
       switch (this.selectedLanguage) {
         case 0 :
