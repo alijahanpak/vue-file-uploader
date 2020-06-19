@@ -1,7 +1,17 @@
 # OverView
+&nbsp;
 
-&nbsp; vue-file uploader. 
+&nbsp; Complete and easy file uploader in Vue.js
 
+
++ Choice Theme : Thumbnail, simple, Table
++ Image compressor
++ Select Level for Image compressor
++ Select file extension
++ Multi language support
++ Right to left support
+
+&nbsp;
 
 # Install
 
@@ -10,14 +20,16 @@
 $npm install vue-file-uploader
 ```
 
+&nbsp;
 
 ## Build Setup
 
-> Import vue-file-uploader to project
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;Import vue-file-uploader to project
 
 ``` js
-const VueUploadComponent = require('vue-upload-component')
- Vue.component('file-upload', VueUploadComponent)
+import fileUploader from 'vue-file-uploader'
 ```
 
 
@@ -390,6 +402,40 @@ const VueUploadComponent = require('vue-upload-component')
   >
  <file-uploader>
  ```
+
+---
+&nbsp;
+
+# Refs
+&nbsp;
+### &nbsp;&nbsp;&nbsp;&nbsp; destroyFileUploader()
+
+&nbsp;
+
+ &nbsp;&nbsp;&nbsp;&nbsp; With this method you can destroy file uploader component.
+ 
+ ``` html
+ <file-uploader
+     :setDocumentAttachment="setInsertedFile"
+     v-model:documentAttachment="registryDocFile"
+     :fileUploaderType= "'thumbnail'"
+     :maxFileSize= "10240"
+     :imageCompressor= "true"
+     :imageCompressLevel= "0.8"
+     :maxFileCount="10"
+     :cardType= "default"
+     :badgeCounter= "true"
+     :rtlSupport= "true"
+     :lang= "'fr'"
+     ref="fileUploader"
+ >
+ </file-uploader>
+ ```
+&nbsp;&nbsp;&nbsp;&nbsp; Use `ref` in component. similar to above example. then call this method 
+``` js
+ this.refs.fileUploader.destroyFileUploader();
+```
+
 ---
 &nbsp;
 
@@ -415,6 +461,20 @@ const VueUploadComponent = require('vue-upload-component')
 </file-uploader>
 ```
 
+``` js
+data: () => ({
+    registryDocFile: [],
+ }),
+
+ methods:{
+     setInsertedFile(item){
+       this.registryDocFile = item;
+     },
+  }
+ ```
+
+&nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
+
 &nbsp;
 ### &nbsp;&nbsp;&nbsp;&nbsp; Simple
 
@@ -436,6 +496,19 @@ const VueUploadComponent = require('vue-upload-component')
 >
 </file-uploader>
 ```
+``` js
+data: () => ({
+    registryDocFile: [],
+ }),
+
+ methods:{
+     setInsertedFile(item){
+       this.registryDocFile = item;
+     },
+  }
+ ```
+
+&nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
 
 &nbsp;
 ### &nbsp;&nbsp;&nbsp;&nbsp; Table
@@ -460,3 +533,17 @@ const VueUploadComponent = require('vue-upload-component')
 >
 </file-uploader>
 ```
+
+``` js
+data: () => ({
+    registryDocFile: [],
+ }),
+
+ methods:{
+     setInsertedFile(item){
+       this.registryDocFile = item;
+     },
+  }
+ ```
+
+&nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader

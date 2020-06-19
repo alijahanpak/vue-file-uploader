@@ -107,8 +107,8 @@ export default {
       ['Setup', 350],
     ],
     props: [
-      ['documentAttachment', 620],
-      ['fileUploaderType', 1180],
+      ['documentAttachment', 920],
+      ['fileUploaderType', 1830],
       ['cardType', 1180],
       ['fileAccept', 1180],
       ['imageCompressor', 1970],
