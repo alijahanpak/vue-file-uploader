@@ -1,12 +1,12 @@
 # OverView
 &nbsp;
 
-&nbsp; Complete and easy file uploader in Vue.js
+&nbsp; Complete and easy file uploader with image compressor in Vue.js
 
 
 + Choice Theme : Thumbnail, simple, Table
 + Image compressor
-+ Select Level for Image compressor
++ Select level for Image compressor
 + Select file extension
 + Multi language support
 + Right to left support
@@ -261,7 +261,7 @@ import fileUploader from 'vue-file-uploader'
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
  <file-uploader
-    :maxFileSize.sync= "maxFileSizeChange"
+    :maxFileSize.sync= "10"
   >
  <file-uploader
  ```

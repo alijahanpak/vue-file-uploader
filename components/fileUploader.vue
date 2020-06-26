@@ -10,18 +10,18 @@
               overlap
               :content="_documentAttachment.length"
             >
-              <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
-              <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
+              <v-btn v-if="state === 'INSERT'" :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
+              <v-btn v-else :color="btnColor" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
             </v-badge>
           </template>
           <template v-else>
-            <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
-            <v-btn v-else color="info" @click="openInputDocumentModal">Insert File</v-btn>
+            <v-btn v-if="state === 'INSERT'" :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
+            <v-btn v-else :color="btnColor" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
           </template>
         </template>
         <template v-if="!badgeCounter">
-          <v-btn v-if="state === 'INSERT'" color="info" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
-          <v-btn v-else color="info" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
+          <v-btn v-if="state === 'INSERT'" :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
+          <v-btn v-else :color="btnColor" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
         </template>
         <v-row v-if="fileUploaderType === 'simple'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
@@ -280,7 +280,7 @@
             <v-file-input v-else multiple show-size v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
           </v-card-text>
           <v-card-actions>
-            <v-btn class="BYekan" :disabled="tempAttachment == null || btnLoader" :loading="btnLoader" color="info" @click="uploadFieldChange">{{selectedLang[lang].add}}</v-btn>
+            <v-btn class="BYekan" :disabled="tempAttachment == null || btnLoader" :loading="btnLoader" :color="btnColor" @click="uploadFieldChange">{{selectedLang[lang].add}}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -401,6 +401,13 @@
       badgeCounter: {
         type: Boolean,
         default: true
+      },
+      /**
+       * change Button Color
+       */
+      btnColor: {
+        type: String,
+        default: 'info'
       },
       /**
        * Enable / Disable image compressor

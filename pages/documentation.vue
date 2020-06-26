@@ -94,6 +94,21 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-fab-transition>
+      <v-btn
+        v-scroll="onScroll"
+        v-show="showScrollToTop"
+        fab
+        dark
+        fixed
+        bottom
+        right
+        color="primary"
+        @click="$vuetify.goTo(0)"
+      >
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </v-container>
 </template>
 
@@ -102,40 +117,43 @@ import readme from './README.md'
 export default {
   data: () => ({
     panelHeight: 0,
+    offsetTop: 0,
     gettingStart: [
-      ['Install', 250],
-      ['Setup', 350],
+      ['Install', 460],
+      ['Setup', 655],
     ],
     props: [
       ['documentAttachment', 920],
       ['fileUploaderType', 1830],
-      ['cardType', 1180],
-      ['fileAccept', 1180],
-      ['imageCompressor', 1970],
-      ['imageCompressLevel', 1150],
-      ['maxFileSize', 1150],
-      ['maxFileCount', 1150],
-      ['cardType', 1150],
-      ['thumb', 1150],
-      ['tableThumbColumn', 1150],
-      ['tableFixedHeader', 1150],
-      ['tableHeight', 1150],
-      ['badgeCounter', 1150],
-      ['rtlSupport', 1150],
-      ['lang', 1150],
+      ['cardType', 2610],
+      ['fileAccept', 3060],
+      ['imageCompressor', 3500],
+      ['imageCompressLevel', 4100],
+      ['maxFileSize', 4480],
+      ['maxFileCount', 5050],
+      ['thumb', 5680],
+      ['tableThumbColumn', 6070],
+      ['tableFixedHeader', 6470],
+      ['tableHeight', 6850],
+      ['badgeCounter', 7250],
+      ['rtlSupport', 7640],
+      ['lang', 8020],
     ],
     refs: [
-      ['fileUploader', 1150]
+      ['fileUploader', 8450]
     ],
     examples: [
-      ['Thumbnail', 1150],
-      ['Simple', 1150],
-      ['Table', 1150]
+      ['Thumbnail', 9200],
+      ['Simple', 10020],
+      ['Table', 10780]
     ],
   }),
   computed: {
     readme() {
       return readme
+    },
+    showScrollToTop() {
+      return this.offsetTop > 60;
     }
   },
   watch: {
@@ -149,8 +167,8 @@ export default {
       window.addEventListener('resize', this.onResize);
       this.panelHeight = window.innerHeight - 150;
     },
-    scrollWin (location){
-      window.scrollTo(0, location)
+    onScroll() {
+      this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;
     }
   },
 }

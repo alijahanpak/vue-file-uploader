@@ -1,16 +1,11 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" lg="12" md="12" xs="12">
+      <v-col cols="12" lg="12" md="12" xs="12" align="center">
+        <v-img src="vue-file-uploader.png" width="200" height="200" class="text-center"></v-img>
         <div class="text-center">
-          <v-icon
-            color="green accent-4"
-            size="200"
-          >
-            mdi-cloud-upload-outline
-          </v-icon>
           <p style="color: #424242; font-size: 3rem">Vue File Uploader</p>
-          <p style="color: #757575; font-size: 1.5rem">Complete and easy file uploader in Vue.js</p>
+          <p style="color: #757575; font-size: 1.5rem">Complete and easy file uploader with image compressor in Vue.js</p>
         </div>
         <v-col cols="12" lg="12" md="12" xs="12">
           <div class="text-center ma-2">

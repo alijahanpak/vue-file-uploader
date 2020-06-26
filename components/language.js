@@ -118,8 +118,8 @@ export default{
       }
     },
     size:{
-      kb: 'KB',
-      mb: 'MB',
+      kb: 'کیلو بایت',
+      mb: 'ميغا بايت'
     },
     maxSizeAlert: 'الحجم الأقصى للملف هو',
     maxFileCountAlert: 'الحد الأقصى لعدد الملفات هو',
