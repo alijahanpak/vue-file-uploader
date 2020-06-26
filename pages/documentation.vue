@@ -138,14 +138,15 @@ export default {
       ['badgeCounter', 7250],
       ['rtlSupport', 7640],
       ['lang', 8020],
+      ['btnColor', 8465],
     ],
     refs: [
-      ['fileUploader', 8450]
+      ['fileUploader', 8850]
     ],
     examples: [
-      ['Thumbnail', 9200],
-      ['Simple', 10020],
-      ['Table', 10780]
+      ['Thumbnail', 9600],
+      ['Simple', 10400],
+      ['Table', 11180]
     ],
   }),
   computed: {

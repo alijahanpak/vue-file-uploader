@@ -402,6 +402,25 @@ import fileUploader from 'vue-file-uploader'
   >
  <file-uploader>
  ```
+---
+&nbsp;
+
+### &nbsp;&nbsp;&nbsp;&nbsp; `btnColor`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; change Button color.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` String `
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; `info` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <file-uploader
+    :btnColor= "'#00796B'"
+  >
+ <file-uploader>
+ ```
 
 ---
 &nbsp;

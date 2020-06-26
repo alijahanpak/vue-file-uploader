@@ -1,4 +1,4 @@
-![Minion](./static/vue-file-uploader.png)
+
 # vue-file-uploader
 
 > Complete and easy file uploader with image compressor in Vue.js
