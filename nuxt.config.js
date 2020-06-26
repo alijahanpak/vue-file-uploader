@@ -2,10 +2,13 @@ import colors from 'vuetify/es5/util/colors'
 import hljs from 'highlight.js';
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
+  generate: {
+    fallback: true
+  },
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
