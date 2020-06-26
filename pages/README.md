@@ -8,8 +8,11 @@
 + Image compressor
 + Select level for Image compressor
 + Select file extension
++ Manage files count
++ Manage files size
 + Multi language support
 + Right to left support
++ ...
 
 &nbsp;
 
