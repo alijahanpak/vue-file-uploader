@@ -145,8 +145,8 @@ export default {
     ],
     examples: [
       ['Thumbnail', 9600],
-      ['Simple', 10400],
-      ['Table', 11180]
+      ['Simple', 10590],
+      ['Table', 11510]
     ],
   }),
   computed: {

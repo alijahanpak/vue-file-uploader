@@ -1,4 +1,5 @@
-![vue-file-uploader](https://img.techpowerup.org/200626/vue-file-uploader.png)
+![vue-file-uploader](https://img.techpowerup.org/200626/vue-file-uploader038.png)
+
 
 # vue-file-uploader
 

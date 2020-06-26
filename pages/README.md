@@ -29,7 +29,7 @@ $npm install vue-file-uploader
 &nbsp;&nbsp;&nbsp;Import vue-file-uploader to project
 
 ``` js
-import fileUploader from 'vue-file-uploader'
+import vueFileUploader from 'vue-file-uploader'
 ```
 
 
@@ -44,11 +44,11 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :setDocumentAttachment="setInsertedFile"
     v-model:documentAttachment="registryDocFile"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  method:
@@ -87,28 +87,28 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :fileUploaderType= "thumbnail"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp; or
 
 ``` html
- <file-uploader
+ <vue-file-uploader
     :fileUploaderType= "simple"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp; or
 
 ``` html
- <file-uploader
+ <vue-file-uploader
     :fileUploaderType= "table"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 ---
@@ -127,10 +127,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :cardType= "'shaped'"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
@@ -148,10 +148,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :fileAccept= "'image/png,image/gif,image/jpeg,image/webp'"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `Important: ` If don`t send fileAccept, file uploader accept all file formats.
@@ -174,17 +174,17 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :imageCompressor= "true"
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
- <file-uploader
+ <vue-file-uploader
    :imageCompressor.sync= "true"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 
@@ -202,9 +202,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :imageCompressLevel= "0.6"
- <file-uploader>
+  >
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
@@ -223,18 +224,18 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :maxFileSize= "1024"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
- <file-uploader
+ <vue-file-uploader
     :maxFileSize.sync= "10240"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 ---
@@ -251,19 +252,19 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :maxFileSize= "5"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you dont send maxFileCount, You can upload files without restrictions.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
- <file-uploader
+ <vue-file-uploader
     :maxFileSize.sync= "10"
   >
- <file-uploader
+ <vue-file-uploader
  ```
 ---
 &nbsp;
@@ -279,10 +280,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :thumb= "true"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 ---
 &nbsp;
@@ -298,10 +299,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :tableThumbColumn= "true"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 ---
 &nbsp;
@@ -317,10 +318,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :tableFixedHeader= "true"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 ---
 &nbsp;
@@ -336,10 +337,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :tableHeight= "500"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 ---
@@ -356,10 +357,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :badgeCounter= "false"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 ---
 &nbsp;
@@ -375,10 +376,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :rtlSupport= "true"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 ---
@@ -397,10 +398,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :lang= "fa"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 ---
 &nbsp;
@@ -416,10 +417,10 @@ import fileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <file-uploader
+ <vue-file-uploader
     :btnColor= "'#00796B'"
   >
- <file-uploader>
+ <vue-file-uploader>
  ```
 
 ---
@@ -434,7 +435,7 @@ import fileUploader from 'vue-file-uploader'
  &nbsp;&nbsp;&nbsp;&nbsp; With this method you can destroy file uploader component.
  
  ``` html
- <file-uploader
+ <vue-file-uploader
      :setDocumentAttachment="setInsertedFile"
      v-model:documentAttachment="registryDocFile"
      :fileUploaderType= "'thumbnail'"
@@ -448,7 +449,7 @@ import fileUploader from 'vue-file-uploader'
      :lang= "'fr'"
      ref="fileUploader"
  >
- </file-uploader>
+ </vue-file-uploader>
  ```
 &nbsp;&nbsp;&nbsp;&nbsp; Use `ref` in component. similar to above example. then call this method 
 ``` js
@@ -463,7 +464,7 @@ import fileUploader from 'vue-file-uploader'
 ### &nbsp;&nbsp;&nbsp;&nbsp; Thumbnail
 
 ``` html
-<file-uploader
+<vue-file-uploader
     :setDocumentAttachment="setInsertedFile"
     v-model:documentAttachment="registryDocFile"
     :fileUploaderType= "'thumbnail'"
@@ -477,92 +478,119 @@ import fileUploader from 'vue-file-uploader'
     :lang= "'fr'"
     ref="fileUploader"
 >
-</file-uploader>
+</vue-file-uploader>
 ```
 
 ``` js
-data: () => ({
-    registryDocFile: [],
- }),
-
- methods:{
-     setInsertedFile(item){
-       this.registryDocFile = item;
-     },
-  }
+<script>
+    import vueFileUploader from 'vue-file-uploader';
+    export default {
+        components: {
+            vueFileUploader,
+        },
+        data: () => ({
+            registryDocFile: [],
+        }),
+        methods:{
+            setInsertedFile(item){
+             this.registryDocFile = item;
+        },
+    }
+ </script>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
 
 &nbsp;
+
+---
+
+&nbsp;
 ### &nbsp;&nbsp;&nbsp;&nbsp; Simple
 
 ``` html
-<file-uploader
+<vue-file-uploader
     :setDocumentAttachment="setInsertedFile"
     v-model:documentAttachment="registryDocFile"
     :fileUploaderType= "'simple'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
     :imageCompressLevel= "0.8"
-    :maxFileCount="10"
+    :maxFileCount= "10"
     :cardType= "default"
     :badgeCounter= "true"
     :thumb= "false"
     :rtlSupport= "true"
     :lang= "'fr'"
-    ref="fileUploader"
+    ref= "fileUploader"
 >
-</file-uploader>
+</vue-file-uploader>
 ```
-``` js
-data: () => ({
-    registryDocFile: [],
- }),
 
- methods:{
-     setInsertedFile(item){
-       this.registryDocFile = item;
-     },
-  }
+``` js
+<script>
+    import vueFileUploader from 'vue-file-uploader';
+    export default {
+        components: {
+            vueFileUploader,
+        },
+        data: () => ({
+            registryDocFile: [],
+        }),
+        methods:{
+            setInsertedFile(item){
+             this.registryDocFile = item;
+        },
+    }
+ </script>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
 
 &nbsp;
+
+---
+
+&nbsp;
 ### &nbsp;&nbsp;&nbsp;&nbsp; Table
 
 ``` html
-<file-uploader
+<vue-file-uploader
     :setDocumentAttachment="setInsertedFile"
     v-model:documentAttachment="registryDocFile"
     :fileUploaderType= "'table'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
     :imageCompressLevel= "0.8"
-    :maxFileCount="10"
+    :maxFileCount= "10"
     :badgeCounter= "true"
-    :thumb.sync= "true"
-    :tableFixedHeader.sync= "true"
-    :tableHeight.sync= "400"
-    :tableThumbColumn.sync= "true"
+    :thumb= "true"
+    :tableFixedHeader= "true"
+    :tableHeight= "400"
+    :tableThumbColumn= "true"
     :lang.sync= "'fr'"
     :rtlSupport= "true"
     ref="fileUploader"
 >
-</file-uploader>
+</vue-file-uploader>
 ```
 
 ``` js
-data: () => ({
-    registryDocFile: [],
- }),
-
- methods:{
-     setInsertedFile(item){
-       this.registryDocFile = item;
-     },
-  }
- ```
+<script>
+    import vueFileUploader from 'vue-file-uploader';
+    export default {
+        components: {
+            vueFileUploader,
+        },
+        data: () => ({
+            registryDocFile: [],
+        }),
+        methods:{
+            setInsertedFile(item){
+             this.registryDocFile = item;
+        },
+    }
+ </script>
+```
 
 &nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
