@@ -10,18 +10,15 @@
               overlap
               :content="_documentAttachment.length"
             >
-              <v-btn v-if="state === 'INSERT'" :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
-              <v-btn v-else :color="btnColor" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
+              <v-btn :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
             </v-badge>
           </template>
           <template v-else>
-            <v-btn v-if="state === 'INSERT'" :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
-            <v-btn v-else :color="btnColor" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
+            <v-btn :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
           </template>
         </template>
         <template v-if="!badgeCounter">
-          <v-btn v-if="state === 'INSERT'" :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
-          <v-btn v-else :color="btnColor" @click="openInputDocumentModal">{{selectedLang[lang].insertFile}}</v-btn>
+          <v-btn :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
         </template>
         <v-row v-if="fileUploaderType === 'simple'">
           <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
@@ -89,26 +86,12 @@
                       absolute
                       color="#036358"
                     >
-                      <template v-if="state === 'INSERT'">
+                      <template>
                         <v-tooltip right>
                           <template v-slot:activator="{ on }">
                             <v-btn outlined large fab v-on="on"  @click="openDeleteDialog(index , '')"><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
                           </template>
                           <span class="BYekan">{{selectedLang[lang].delete}}</span>
-                        </v-tooltip>
-                      </template>
-                      <template v-else>
-                        <v-tooltip right>
-                          <template v-slot:activator="{ on }">
-                            <v-btn outlined large fab v-on="on"  @click="openDeleteDialog(index, attachment.ID)"><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
-                          </template>
-                          <span class="BYekan">{{selectedLang[lang].delete}}</span>
-                        </v-tooltip>
-                        <v-tooltip left>
-                          <template v-slot:activator="{ on }">
-                            <v-btn style="margin-right: 20px" outlined large fab v-on="on" color="purple lighten-5" @click="getBinaryFile(attachment)" target="_blank"><v-icon>mdi-eye-check-outline</v-icon></v-btn>
-                          </template>
-                          <span class="BYekan">Preview</span>
                         </v-tooltip>
                       </template>
                     </v-overlay>
@@ -337,41 +320,12 @@
   export default {
     props: {
       /**
-       * get recordID from selected record
-       */
-      recordID: Number,
-      /**
        * Array contain files
        */
       documentAttachment: [Array],
       /**
-       * define 'INSERT' or 'UPDATE' mode
-       */
-      state: String,
-      /**
        * Send api url for 'add' and 'delete'.
        * f.e: /building/add or /building/delete
-       */
-      apiUrl: String,
-      /**
-       * Send api url for fetch current record after changes.
-       * f.e: /building/fetch.
-       */
-      apiFetchUrl: String,
-      /**
-       * Send caption Id to define id property to UPDATE apt
-       */
-      captionId: String,
-      /**
-       * Send insertFilePermission String for manage user permission
-       */
-      insertFilePermission: String,
-      /**
-       * Send deleteFilePermission String for manage user permission
-       */
-      deleteFilePermission: String,
-      /**
-       * Set Maximum File Size in KB
        */
       maxFileSize: {
         type: Number,
@@ -662,16 +616,8 @@
               tempFile.format= strTemp[0].replace('data:' ,'');
               file.file=tempFile;
               this.registryDocFile.push(file);
-              /**
-               * Send updated array to parent and show new details
-               * this Event call if state = 'INSERT'
-               * @property {array} newValue new value set
-               */
-              //console.log(JSON.stringify(this.registryDocFile));
               this.$emit('setDocumentAttachment' , this.registryDocFile);
               this._documentAttachment= this.registryDocFile;
-              if(this.state === 'UPDATE')
-                this.documentAttachmentAPI.push(file);
             }
           }
           else {
@@ -681,44 +627,6 @@
           }
         }
         //console.log('FILE =>>>>' +JSON.stringify(this.documentAttachmentAPI));
-        if (this.state === 'UPDATE'){
-          let apiDATA= [];
-          for(let item of this.documentAttachmentAPI){
-            let obj = {};
-            const newProperty = this.captionId;
-            obj[newProperty] =  this.recordID;
-            obj.file= item.file;
-            apiDATA.push(obj)
-          }
-          this.$axios.$post(this.apiUrl+ 'add', apiDATA).then((response) => {
-            this.fileUploaderSnackText= 'فایل مورد نظر با موفقیت افزوده شد';
-            this.fileUploaderSnackBarAlertColor= 'green';
-            this.fileUploaderSnackBarAlert= true;
-            this.$axios.$post(this.apiFetchUrl,{id: this.recordID})
-              .then(response => {
-                //this.returnedRecord = response;
-                this.btnLoader= false;
-                this.$emit('fetchData');
-                /**
-                 * Send updated record to parent and show new details
-                 *
-                 * @property {response} newValue new value set
-                 */
-                this.$emit('getRecordDetail' , response);
-                this.insertDocumentDialog= false;
-              })
-              .catch(error => {
-                console.log(error.response)
-              });
-            console.log(response);
-          },(error) => {
-            console.log(error);
-            this.btnLoader = false;
-            this.fileUploaderSnackBarAlertColor = 'red';
-            this.fileUploaderSnackText = 'خطا در افزودن فایل! لطفا دوباره تلاش کنید'
-            this.fileUploaderSnackBarAlert = true;
-          });
-        }
         //console.log(JSON.stringify( this.registryDocFile));
         this.documentAttachmentAPI= [];
         this.insertDocumentDialog= false;
@@ -771,48 +679,9 @@
 
 
        deleteDocument(){
-        if(this.state === 'INSERT')
-        {
           this.registryDocFile.splice(this.selectedIndex , 1);
           this._documentAttachment= this.registryDocFile;
           this.deleteDocumentDialog= false;
-        }
-        else if(this.state === 'UPDATE'){
-          this.btnLoader= true;
-          this.$axios.$post(this.apiUrl+ 'delete', {
-            id: this.selectedId
-          }).then((response) => {
-            this.registryDocFile.splice(this.selectedIndex , 1);
-            this._documentAttachment= this.registryDocFile;
-            this.fileUploaderSnackText= 'فایل با موفقیت حذف گردید'
-            this.fileUploaderSnackBarAlertColor= 'green';
-            this.fileUploaderSnackBarAlert= true;
-            this.$axios.$post(this.apiFetchUrl,{id: this.recordID})
-              .then(response => {
-                //this.returnedRecord = response;
-                this.btnLoader= false;
-                this.$emit('getRecordDetail' ,response);
-                this.deleteDocumentDialog= false;
-              })
-              .catch(error => {
-                console.log(error.response)
-              });
-            console.log(response);
-          },(error) => {
-            console.log(error);
-            this.btnLoader= false;
-            this.fileUploaderSnackText= 'خطا در حذف فایل. لطفا دوباره تلاش کنید'
-            this.fileUploaderSnackBarAlertColor= 'red';
-            this.fileUploaderSnackBarAlert= true;
-            this.deleteDocumentDialog= false;
-          });
-          /**
-           *call fetchData from Parent and update all records in background.
-           *
-           *
-           */
-          this.$emit('fetchData');
-        }
       },
 
       getBinaryFile(attachment) {

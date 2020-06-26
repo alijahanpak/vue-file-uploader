@@ -20,7 +20,6 @@
         <file-uploader
           :setDocumentAttachment="setInsertedFile"
           v-model:documentAttachment="registryDocFile"
-          :state="'INSERT'"
           :fileAccept="fileExtensions"
           :maxFileSize.sync= "maxFileSizeChange"
           :imageCompressor.sync= "imageCompressorState"
