@@ -3,8 +3,9 @@
 
 # vue-file-uploader
 
-> Complete and easy file uploader with image compressor in Vue.js
+> Complete and simple file uploader with image compressor in Vue.js
 
++ Choice Theme : Thumbnail, simple, Table
 + Image compressor
 + Select level for Image compressor
 + Select file extension
@@ -18,7 +19,7 @@
 - [Demo](https://friendly-varahamihira-45c09f.netlify.app)
 
 ## Documentation
-- [get Documentation](https://friendly-varahamihira-45c09f.netlify.app/documentation)
+- [Documentation](https://friendly-varahamihira-45c09f.netlify.app/documentation)
 
 ## Install
 ```bash

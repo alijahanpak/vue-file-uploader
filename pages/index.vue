@@ -5,7 +5,7 @@
         <v-img src="vue-file-uploader.png" width="200" height="200" class="text-center"></v-img>
         <div class="text-center">
           <p style="color: #424242; font-size: 3rem">Vue File Uploader</p>
-          <p style="color: #757575; font-size: 1.5rem">Complete and easy file uploader with image compressor in Vue.js</p>
+          <p style="color: #757575; font-size: 1.5rem">Complete and simple file uploader with image compressor in Vue.js</p>
         </div>
         <v-col cols="12" lg="12" md="12" xs="12">
           <div class="text-center ma-2">

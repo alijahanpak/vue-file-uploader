@@ -1,7 +1,7 @@
 # OverView
 &nbsp;
 
-&nbsp; Complete and easy file uploader with image compressor in Vue.js
+&nbsp; Complete and simple file uploader with image compressor in Vue.js
 
 
 + Choice Theme : Thumbnail, simple, Table

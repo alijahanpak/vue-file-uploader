@@ -1,7 +1,7 @@
 {
   "name": "vue-file-uploader",
   "version": "1.0.0",
-  "description": "Complete and easy file uploader with image compressor in Vue.js",
+  "description": "Complete and simple file uploader with image compressor in Vue.js",
   "author": "Ali Jahanapak",
   "private": true,
   "scripts": {
@@ -12,9 +12,7 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.8",
-    "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/markdownit": "^1.2.9",
-    "@nuxtjs/pwa": "^3.0.0-0",
     "highlightjs": "^9.16.2",
     "markdown-it": "^11.0.0",
     "markdown-it-attrs": "^3.0.3",
