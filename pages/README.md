@@ -18,12 +18,34 @@
 
 # Install
 
+&nbsp;
 
+&nbsp;&nbsp;&nbsp;1. Install package:
 ``` bash
 $npm install handy-uploader
 ```
 
-&nbsp;
+
+&nbsp;&nbsp;&nbsp;2. You should Install Vuetify on project:
+
+### &nbsp;&nbsp;  Install on Vue CLI
+``` bash
+$vue add vuetify
+```
+### &nbsp;&nbsp;  Install on Nuxt
+``` bash
+$npm install @nuxtjs/vuetify -D
+```
+&nbsp;&nbsp;&nbsp;Once installed, update your `nuxt.config.js` file to include the Vuetify module in the build.
+
+``` js
+// nuxt.config.js
+{
+  buildModules: [
+    '@nuxtjs/vuetify',
+}
+```
+
 
 ## Build Setup
 
@@ -32,9 +54,59 @@ $npm install handy-uploader
 &nbsp;&nbsp;&nbsp;Import handy-uploader to project
 
 ``` js
-import handyUploader from 'handy-uploader'
+<script>
+    import handyUploader from 'handy-uploader/src/components/handyUploader';
+    export default {
+        components: {
+            handyUploader,
+        },
+    }
+ </script>
 ```
 
+&nbsp;
+
+### &nbsp;&nbsp;&nbsp;Import handy-uploader to project - Full Example
+
+``` html
+<vue-file-uploader
+    :setDocumentAttachment="setInsertedFile"
+    :documentAttachment.sync="registryDocFile"
+    :fileUploaderType= "'simple'"
+    :maxFileSize= "10240"
+    :imageCompressor= "true"
+    :imageCompressLevel= "0.8"
+    :maxFileCount= "10"
+    :badgeCounter= "true"
+    :thumb= "false"
+    :rtlSupport= "true"
+    :lang= "'fr'"
+    ref= "fileUploader"
+>
+</handy-uploader>
+```
+
+``` js
+<script>
+    import handyUploader from 'handy-uploader/src/components/handyUploader';
+    export default {
+        components: {
+            handyUploader,
+        },
+        data: () => ({
+            registryDocFile: [],
+        }),
+        methods:{
+            setInsertedFile(item){
+             this.registryDocFile = item;
+            },
+        }
+    }
+ </script>
+```
+---
+
+&nbsp;
 
 # props
 &nbsp;
@@ -475,7 +547,6 @@ import handyUploader from 'handy-uploader'
     :imageCompressor= "true"
     :imageCompressLevel= "0.8"
     :maxFileCount="10"
-    :cardType= "default"
     :badgeCounter= "true"
     :rtlSupport= "true"
     :lang= "'fr'"
@@ -497,7 +568,8 @@ import handyUploader from 'handy-uploader'
         methods:{
             setInsertedFile(item){
              this.registryDocFile = item;
-        },
+            },
+        }
     }
  </script>
  ```
@@ -520,7 +592,6 @@ import handyUploader from 'handy-uploader'
     :imageCompressor= "true"
     :imageCompressLevel= "0.8"
     :maxFileCount= "10"
-    :cardType= "default"
     :badgeCounter= "true"
     :thumb= "false"
     :rtlSupport= "true"
@@ -543,7 +614,8 @@ import handyUploader from 'handy-uploader'
         methods:{
             setInsertedFile(item){
              this.registryDocFile = item;
-        },
+            },
+        }
     }
  </script>
  ```
@@ -591,7 +663,8 @@ import handyUploader from 'handy-uploader'
         methods:{
             setInsertedFile(item){
              this.registryDocFile = item;
-        },
+            },
+        }
     }
  </script>
 ```
