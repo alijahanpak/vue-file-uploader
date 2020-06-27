@@ -20,7 +20,7 @@
 
 
 ``` bash
-$npm install vue-file-uploader
+$npm install handy-uploader
 ```
 
 &nbsp;
@@ -29,10 +29,10 @@ $npm install vue-file-uploader
 
 &nbsp;
 
-&nbsp;&nbsp;&nbsp;Import vue-file-uploader to project
+&nbsp;&nbsp;&nbsp;Import handy-uploader to project
 
 ``` js
-import vueFileUploader from 'vue-file-uploader'
+import handyUploader from 'handy-uploader'
 ```
 
 
@@ -47,11 +47,11 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :setDocumentAttachment="setInsertedFile"
-    v-model:documentAttachment="registryDocFile"
+    :documentAttachment.sync="registryDocFile"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  method:
@@ -90,28 +90,28 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :fileUploaderType= "thumbnail"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp; or
 
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :fileUploaderType= "simple"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp; or
 
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :fileUploaderType= "table"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 ---
@@ -130,10 +130,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :cardType= "'shaped'"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
@@ -151,10 +151,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :fileAccept= "'image/png,image/gif,image/jpeg,image/webp'"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `Important: ` If don`t send fileAccept, file uploader accept all file formats.
@@ -177,17 +177,17 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :imageCompressor= "true"
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
- <vue-file-uploader
+ <handy-uploader
    :imageCompressor.sync= "true"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 
@@ -205,10 +205,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :imageCompressLevel= "0.6"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
@@ -227,18 +227,18 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :maxFileSize= "1024"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :maxFileSize.sync= "10240"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 ---
@@ -255,19 +255,19 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :maxFileSize= "5"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you dont send maxFileCount, You can upload files without restrictions.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :maxFileSize.sync= "10"
   >
- <vue-file-uploader
+ <handy-uploader
  ```
 ---
 &nbsp;
@@ -283,10 +283,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :thumb= "true"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 ---
 &nbsp;
@@ -302,10 +302,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :tableThumbColumn= "true"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 ---
 &nbsp;
@@ -321,10 +321,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :tableFixedHeader= "true"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 ---
 &nbsp;
@@ -340,10 +340,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :tableHeight= "500"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 ---
@@ -360,10 +360,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :badgeCounter= "false"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 ---
 &nbsp;
@@ -379,10 +379,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :rtlSupport= "true"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 ---
@@ -401,10 +401,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :lang= "fa"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 ---
 &nbsp;
@@ -420,10 +420,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
- <vue-file-uploader
+ <handy-uploader
     :btnColor= "'#00796B'"
   >
- <vue-file-uploader>
+ <handy-uploader>
  ```
 
 ---
@@ -438,9 +438,9 @@ import vueFileUploader from 'vue-file-uploader'
  &nbsp;&nbsp;&nbsp;&nbsp; With this method you can destroy file uploader component.
  
  ``` html
- <vue-file-uploader
+ <handy-uploader
      :setDocumentAttachment="setInsertedFile"
-     v-model:documentAttachment="registryDocFile"
+     :documentAttachment.sync="registryDocFile"
      :fileUploaderType= "'thumbnail'"
      :maxFileSize= "10240"
      :imageCompressor= "true"
@@ -452,7 +452,7 @@ import vueFileUploader from 'vue-file-uploader'
      :lang= "'fr'"
      ref="fileUploader"
  >
- </vue-file-uploader>
+ </handy-uploader>
  ```
 &nbsp;&nbsp;&nbsp;&nbsp; Use `ref` in component. similar to above example. then call this method 
 ``` js
@@ -467,9 +467,9 @@ import vueFileUploader from 'vue-file-uploader'
 ### &nbsp;&nbsp;&nbsp;&nbsp; Thumbnail
 
 ``` html
-<vue-file-uploader
+<handy-uploader
     :setDocumentAttachment="setInsertedFile"
-    v-model:documentAttachment="registryDocFile"
+    :documentAttachment.sync="registryDocFile"
     :fileUploaderType= "'thumbnail'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
@@ -486,10 +486,10 @@ import vueFileUploader from 'vue-file-uploader'
 
 ``` js
 <script>
-    import vueFileUploader from 'vue-file-uploader';
+    import handyUploader from 'vue-file-uploader';
     export default {
         components: {
-            vueFileUploader,
+            handyUploader,
         },
         data: () => ({
             registryDocFile: [],
@@ -514,7 +514,7 @@ import vueFileUploader from 'vue-file-uploader'
 ``` html
 <vue-file-uploader
     :setDocumentAttachment="setInsertedFile"
-    v-model:documentAttachment="registryDocFile"
+    :documentAttachment.sync="registryDocFile"
     :fileUploaderType= "'simple'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
@@ -527,15 +527,15 @@ import vueFileUploader from 'vue-file-uploader'
     :lang= "'fr'"
     ref= "fileUploader"
 >
-</vue-file-uploader>
+</handy-uploader>
 ```
 
 ``` js
 <script>
-    import vueFileUploader from 'vue-file-uploader';
+    import handyUploader from 'handy-uploader';
     export default {
         components: {
-            vueFileUploader,
+            handyUploader,
         },
         data: () => ({
             registryDocFile: [],
@@ -558,9 +558,9 @@ import vueFileUploader from 'vue-file-uploader'
 ### &nbsp;&nbsp;&nbsp;&nbsp; Table
 
 ``` html
-<vue-file-uploader
+<handy-uploader
     :setDocumentAttachment="setInsertedFile"
-    v-model:documentAttachment="registryDocFile"
+    :documentAttachment.sync="registryDocFile"
     :fileUploaderType= "'table'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
@@ -575,15 +575,15 @@ import vueFileUploader from 'vue-file-uploader'
     :rtlSupport= "true"
     ref="fileUploader"
 >
-</vue-file-uploader>
+</handy-uploader>
 ```
 
 ``` js
 <script>
-    import vueFileUploader from 'vue-file-uploader';
+    import handyUploader from 'handy-uploader';
     export default {
         components: {
-            vueFileUploader,
+            handyUploader,
         },
         data: () => ({
             registryDocFile: [],

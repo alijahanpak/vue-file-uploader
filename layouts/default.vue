@@ -22,7 +22,7 @@
         Examples
       </v-btn>
 
-      <v-btn small href="https://github.com/alijahanpak/vue-file-uploader" target="_blank" text>
+      <v-btn small href="https://github.com/alijahanpak/handy-uploader" target="_blank" text>
         <v-icon>mdi-github</v-icon> Github
       </v-btn>
 
@@ -52,7 +52,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'vue-file-uploader'
+      title: 'handy-uploader'
     }
   },
   methods: {
