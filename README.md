@@ -24,5 +24,5 @@
 ## Install
 ```bash
 # install 
-$ npm install vue-file-uploader
+$ npm install handy-uploader
 
