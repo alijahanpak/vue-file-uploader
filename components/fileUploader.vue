@@ -259,8 +259,8 @@
             <v-icon @click="insertDocumentDialog = false">mdi-close</v-icon>
           </v-card-title>
           <v-card-text class="BYekan">
-            <v-file-input v-if="fileAccept !== ''" multiple show-size :accept="fileAccept" v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
-            <v-file-input v-else multiple show-size v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
+            <v-file-input v-if="fileAccept !== ''" multiple :accept="fileAccept" chip v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
+            <v-file-input v-else multiple v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
           </v-card-text>
           <v-card-actions>
             <v-btn class="BYekan" :disabled="tempAttachment == null || btnLoader" :loading="btnLoader" :color="btnColor" @click="uploadFieldChange">{{selectedLang[lang].add}}</v-btn>
@@ -444,9 +444,13 @@
       shaped: false,
       tile: false,
       selectedLang: {},
+      beforeInsertAttachments: {},
     }),
     watch: {
-      cardType : function(val) {
+      tempAttachment : function(){
+        console.log(this.tempAttachment);
+      },
+      cardType : function() {
         this.$emit('update:cardType', this.cardType);
         this.setCardTheme();
       },
@@ -456,31 +460,31 @@
       maxFileCount : function() {
         this.$emit('update:maxFileCount', this.maxFileCount);
       },
-      maxFileSize : function(val) {
+      maxFileSize : function() {
         this.$emit('update:maxFileSize', Number(this.maxFileSize));
       },
-      imageCompressor : function(val) {
+      imageCompressor : function() {
         this.$emit('update:imageCompressor', this.imageCompressor);
       },
-      imageCompressLevel : function(val) {
+      imageCompressLevel : function() {
         this.$emit('update:imageCompressLevel', this.imageCompressLevel);
       },
-      fileAccept : function(val) {
+      fileAccept : function() {
         this.$emit('update:fileAccept', this.fileAccept);
       },
-      thumb : function(val) {
+      thumb : function() {
         this.$emit('update:thumb', this.thumb);
       },
-      tableThumbColumn : function(val) {
+      tableThumbColumn : function() {
         this.$emit('update:tableThumbColumn', this.tableThumbColumn);
       },
-      tableFixedHeader : function(val) {
+      tableFixedHeader : function() {
         this.$emit('update:tableFixedHeader', this.tableFixedHeader);
       },
-      tableHeight : function(val) {
+      tableHeight : function() {
         this.$emit('update:tableHeight', this.tableHeight);
       },
-      lang : function(val) {
+      lang : function() {
         this.$emit('update:lang', this.lang);
       },
     },
