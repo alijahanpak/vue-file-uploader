@@ -261,6 +261,14 @@
           <v-card-text class="BYekan">
             <v-file-input v-if="fileAccept !== ''" multiple :accept="fileAccept" chip v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
             <v-file-input v-else multiple v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
+            <template v-for="attachment in tempAttachmentChanged">
+              <v-text-field
+                label="File Name"
+                v-model="attachment.name"
+                :prepend-icon="attachment.icon"
+              >
+              </v-text-field>
+            </template>
           </v-card-text>
           <v-card-actions>
             <v-btn class="BYekan" :disabled="tempAttachment == null || btnLoader" :loading="btnLoader" :color="btnColor" @click="uploadFieldChange">{{selectedLang[lang].add}}</v-btn>
@@ -417,6 +425,27 @@
         type: String,
         default: 'en'
       },
+      /**
+       * Change file Name before upload
+       */
+      changeFileName: {
+        type: Boolean,
+        default: true
+      },
+      /**
+       * Change file Description before upload
+       */
+      addFileDescription: {
+        type: Boolean,
+        default: true
+      },
+      /**
+       * Change file tag before upload
+       */
+      addFileTag: {
+        type: Boolean,
+        default: true
+      },
     },
 
     model: {
@@ -427,6 +456,7 @@
       insertDocumentDialog: false,
       deleteDocumentDialog: false,
       tempAttachment:[],
+      tempAttachmentChanged:[],
       fileUploaderSnackBarAlert: false,
       fileUploaderSnackText: '',
       fileUploaderSnackBarAlertColor: 'green',
@@ -447,8 +477,10 @@
       beforeInsertAttachments: {},
     }),
     watch: {
-      tempAttachment : function(){
-        console.log(this.tempAttachment);
+      tempAttachment : function(newValue){
+        if(this.tempAttachment.length > 0)
+          this.getAttachmentDetails(newValue);
+        else this.tempAttachmentChanged = [];
       },
       cardType : function() {
         this.$emit('update:cardType', this.cardType);
@@ -577,7 +609,7 @@
      */
       async uploadFieldChange (){
         this.btnLoader= true;
-        for(let item of this.tempAttachment){
+        for(let [index,item] of this.tempAttachment.entries()){
           if(this._documentAttachment.length < this.maxFileCount) {
             if((item.size / 1000).toFixed(1) > this.maxFileSize){
               this.fileUploaderSnackBarAlertColor= 'red';
@@ -603,7 +635,7 @@
                   imgFile = await this.compressImage(this.readerFile, fileType[1]);
                 }
               }
-              tempFile.subject= item.name;
+              tempFile.subject= this.tempAttachmentChanged[index].name + '.' + this.tempAttachmentChanged[index].format;
               let strTemp= this.readerFile.split(",")
               if(status){
                 let imgTemp= imgFile.split(",")
@@ -615,7 +647,7 @@
                 tempFile.base64=strTemp[1];
                 tempFile.size= String(item.size);
               }
-              tempFile.name= item.name;
+              tempFile.name= this.tempAttachmentChanged[index].name+ '.' + this.tempAttachmentChanged[index].format;
               //tempFile.format= item.name.split('.').pop().toLowerCase();
               tempFile.format= strTemp[0].replace('data:' ,'');
               file.file=tempFile;
@@ -633,10 +665,11 @@
         //console.log('FILE =>>>>' +JSON.stringify(this.documentAttachmentAPI));
         //console.log(JSON.stringify( this.registryDocFile));
         this.documentAttachmentAPI= [];
+        this.tempAttachmentChanged= [];
         this.insertDocumentDialog= false;
       },
 
-      compressImage (base64, fileFormat) {
+      compressImage (base64) {
         const canvas = document.createElement('canvas')
         const img = document.createElement('img')
 
@@ -686,6 +719,36 @@
           this.registryDocFile.splice(this.selectedIndex , 1);
           this._documentAttachment= this.registryDocFile;
           this.deleteDocumentDialog= false;
+      },
+
+      getAttachmentDetails(selectedAttachment){
+        for(let item of selectedAttachment){
+          let obj= {};
+          let name='';
+          name= item.name.split('.');
+          obj.format= item.name.substr(item.name.lastIndexOf('.') + 1);
+          obj.name= name[0];
+          if( obj.format === 'doc' ||  obj.format === 'docx' ||  obj.format === 'odt')
+            obj.icon= 'mdi-file-word-outline';
+          else if( obj.format === 'pdf')
+            obj.icon= 'mdi-file-pdf-outline';
+          else if( obj.format === 'jpg' ||  obj.format === 'jpeg' ||  obj.format === 'png' ||  obj.format === 'tif' ||  obj.format === 'bmp')
+            obj.icon= 'mdi-file-image-outline';
+          else if( obj.format === 'xls' ||  obj.format === 'xlsx')
+            obj.icon= 'mdi-file-excel-outline';
+          else if( obj.format === 'pptx' ||  obj.format === 'pptm' ||  obj.format === 'ppt')
+            obj.icon= 'mdi-file-powerpoint-outline';
+          else if( obj.format === 'mp4' ||  obj.format === 'mov' ||  obj.format === 'flv' ||  obj.format === 'wmv' ||  obj.format === 'avi')
+            obj.icon= 'mdi-file-video-outline';
+          else if( obj.format === 'dwg')
+            obj.icon= 'mdi-file-cad';
+          else if( obj.format === 'zip' ||  obj.format === 'rar' ||  obj.format === '7-zip')
+            obj.icon= 'mdi-folder-zip-outline';
+          else if( obj.format === 'txt')
+            obj.icon= 'mdi-script-text-outline';
+          else obj.icon= 'mdi-file-question-outline';
+          this.tempAttachmentChanged.push(obj)
+        }
       },
 
       getBinaryFile(attachment) {
