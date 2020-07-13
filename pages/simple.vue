@@ -30,6 +30,10 @@
           :badgeCounter.sync= "badgeCounterState"
           :thumb.sync= "thumbState"
           :lang.sync= "setLang"
+          :changeFileName="true"
+          :addFileDescription="true"
+          :addFileTag="true"
+          :tags="tags"
           ref="fileUploader"
         >
         </file-uploader>
@@ -175,6 +179,7 @@ export default {
     thumbState: true,
     selectedLanguage: 0,
     setLang: 'en',
+    tags:['foo', 'bar', 'fizz', 'buzz']
   }),
   watch: {
     selectedCardType: function (val) {
@@ -208,6 +213,7 @@ export default {
   methods:{
     setInsertedFile(item){
       this.registryDocFile = item;
+      console.log(JSON.stringify(this.registryDocFile));
     },
 
     setCardType(){

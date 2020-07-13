@@ -23,6 +23,9 @@ export default{
     },
     maxFileSizeAlert: 'Max file Size is',
     maxFileCountAlert: 'Max file Count is',
+    fileName: 'File Name',
+    fileDescription: 'File Description',
+    fileTags: 'File Tags',
   },
   fa:{
     insertFile: 'افزودن فایل',

@@ -3,12 +3,12 @@
     <v-row>
       <v-col cols="12" md="12" xs="12">
         <template v-if="badgeCounter">
-          <template v-if="_documentAttachment.length > 0">
+          <template v-if="documentAttachment.length > 0">
             <v-badge
               bordered
-              :color="_documentAttachment.length === maxFileCount ? 'error' : 'success'"
+              :color="documentAttachment.length === maxFileCount ? 'error' : 'success'"
               overlap
-              :content="_documentAttachment.length"
+              :content="documentAttachment.length"
             >
               <v-btn :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
             </v-badge>
@@ -21,7 +21,7 @@
           <v-btn :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
         </template>
         <v-row v-if="fileUploaderType === 'simple'">
-          <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
+          <v-col v-for="(attachment, index) in documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-hover>
               <template v-slot:default="{ hover }">
                 <v-card
@@ -102,7 +102,7 @@
           </v-col>
         </v-row>
         <v-row v-else-if="fileUploaderType === 'thumbnail'">
-          <v-col v-for="(attachment, index) in _documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
+          <v-col v-for="(attachment, index) in documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
             <v-card
               :shaped="shaped"
               :outlined="outlined"
@@ -151,6 +151,15 @@
                   {{  Number((attachment.file.size / 1000).toFixed(1)) +'  '+ selectedLang[lang].size.kb}}
                   <v-icon right>mdi-harddisk</v-icon>
                 </v-chip>
+                <v-row>
+                  <v-col cols="12" lg="12">
+                    <template v-for="tag in attachment.file.tags">
+                      <v-chip style="margin: 5px">
+                        {{tag}}
+                      </v-chip>
+                    </template>
+                  </v-col>
+                </v-row>
               </v-card-subtitle>
               <v-card-subtitle v-if="Number((attachment.file.size / 1000).toFixed(1)) > 1024">
                 <v-chip
@@ -188,7 +197,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(attachment, index) in _documentAttachment" :key="attachment.id">
+                <tr v-for="(attachment, index) in documentAttachment" :key="attachment.id">
                   <td v-if="tableThumbColumn">
                     <template v-if="attachment.file.name.split('.').pop().toLowerCase() == 'jpg' || attachment.file.name.split('.').pop().toLowerCase() == 'jpeg' || attachment.file.name.split('.').pop().toLowerCase() == 'png' || attachment.file.name.split('.').pop().toLowerCase() == 'tif' || attachment.file.name.split('.').pop().toLowerCase() == 'bmp'">
                       <v-img
@@ -261,13 +270,41 @@
           <v-card-text class="BYekan">
             <v-file-input v-if="fileAccept !== ''" multiple :accept="fileAccept" chip v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
             <v-file-input v-else multiple v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
-            <template v-for="attachment in tempAttachmentChanged">
-              <v-text-field
-                label="File Name"
-                v-model="attachment.name"
-                :prepend-icon="attachment.icon"
-              >
-              </v-text-field>
+            <template>
+              <v-expansion-panels>
+                <v-expansion-panel
+                  v-for="attachment in tempAttachmentChanged"
+                >
+                  <v-expansion-panel-header>{{attachment.name}}</v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <v-text-field
+                      v-if="changeFileName"
+                      :label="selectedLang[lang].fileName"
+                      v-model="attachment.name"
+                      :prepend-icon="attachment.icon"
+                    >
+                    </v-text-field>
+                    <v-textarea
+                      v-if="addFileDescription"
+                      :label="selectedLang[lang].fileDescription"
+                      auto-grow
+                      row-height="1"
+                      v-model="attachment.description"
+                    >
+                    </v-textarea>
+                    <v-autocomplete
+                      v-if="addFileTag"
+                      v-model="attachment.tags"
+                      :items="tags"
+                      dense
+                      chips
+                      small-chips
+                      :label="selectedLang[lang].fileTags"
+                      multiple
+                    ></v-autocomplete>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
             </template>
           </v-card-text>
           <v-card-actions>
@@ -430,27 +467,28 @@
        */
       changeFileName: {
         type: Boolean,
-        default: true
+        default: false
       },
       /**
        * Change file Description before upload
        */
       addFileDescription: {
         type: Boolean,
-        default: true
+        default: false
       },
       /**
        * Change file tag before upload
        */
       addFileTag: {
         type: Boolean,
-        default: true
+        default: false
       },
-    },
-
-    model: {
-      prop: 'documentAttachment',
-      event: 'documentAttachmentChange'
+      /**
+       * Array of tags
+       */
+      tags: {
+        type: Array,
+      },
     },
     data: () => ({
       insertDocumentDialog: false,
@@ -521,14 +559,7 @@
       },
     },
     computed: {
-      _documentAttachment: {
-        get: function() {
-          return this.documentAttachment
-        },
-        set: function(value) {
-          this.$emit('documentAttachmentChange', value)
-        }
-      },
+
     },
     mounted () {
 
@@ -610,7 +641,7 @@
       async uploadFieldChange (){
         this.btnLoader= true;
         for(let [index,item] of this.tempAttachment.entries()){
-          if(this._documentAttachment.length < this.maxFileCount) {
+          if(this.documentAttachment.length < this.maxFileCount) {
             if((item.size / 1000).toFixed(1) > this.maxFileSize){
               this.fileUploaderSnackBarAlertColor= 'red';
               this.fileUploaderSnackText= `${this.selectedLang[this.lang].maxFileSizeAlert} ${Math.round(this.maxFileSize / 1024)} ${this.selectedLang[this.lang].size.mb}`;
@@ -635,7 +666,7 @@
                   imgFile = await this.compressImage(this.readerFile, fileType[1]);
                 }
               }
-              tempFile.subject= this.tempAttachmentChanged[index].name + '.' + this.tempAttachmentChanged[index].format;
+              //tempFile.subject= this.tempAttachmentChanged[index].name + '.' + this.tempAttachmentChanged[index].format;
               let strTemp= this.readerFile.split(",")
               if(status){
                 let imgTemp= imgFile.split(",")
@@ -648,12 +679,15 @@
                 tempFile.size= String(item.size);
               }
               tempFile.name= this.tempAttachmentChanged[index].name+ '.' + this.tempAttachmentChanged[index].format;
-              //tempFile.format= item.name.split('.').pop().toLowerCase();
+              if(this.addFileDescription)
+                tempFile.description= this.tempAttachmentChanged[index].description;
+              if(this.addFileTag)
+                tempFile.tags= this.tempAttachmentChanged[index].tags;
               tempFile.format= strTemp[0].replace('data:' ,'');
               file.file=tempFile;
               this.registryDocFile.push(file);
-              this.$emit('setDocumentAttachment' , this.registryDocFile);
-              this._documentAttachment= this.registryDocFile;
+              this.$emit('update:documentAttachment' , this.registryDocFile);
+              //console.log(JSON.stringify(this.documentAttachment));
             }
           }
           else {
@@ -662,8 +696,6 @@
             this.fileUploaderSnackBarAlert= true;
           }
         }
-        //console.log('FILE =>>>>' +JSON.stringify(this.documentAttachmentAPI));
-        //console.log(JSON.stringify( this.registryDocFile));
         this.documentAttachmentAPI= [];
         this.tempAttachmentChanged= [];
         this.insertDocumentDialog= false;
@@ -714,10 +746,9 @@
         this.deleteDocumentDialog= true;
       },
 
-
        deleteDocument(){
           this.registryDocFile.splice(this.selectedIndex , 1);
-          this._documentAttachment= this.registryDocFile;
+          this.documentAttachment= this.registryDocFile;
           this.deleteDocumentDialog= false;
       },
 
@@ -761,7 +792,7 @@
 
       destroyFileUploader(){
         this.documentAttachmentAPI = [];
-        this._documentAttachment = [];
+        this.documentAttachment = [];
         this.registryDocFile= [];
         this.tempAttachment = [];
       },
