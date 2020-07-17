@@ -12,6 +12,7 @@ export default{
       thumb: 'Thumb',
       name: 'Name',
       size: 'Size',
+      tags: 'tags',
       action:{
         action: 'Action',
         deleteTooltip: 'Delete'
@@ -51,6 +52,9 @@ export default{
     },
     maxSizeAlert: 'حداکثر حجم فایل انتحابی ',
     maxFileCountAlert: 'حداکثر تعداد فایل انتخابی',
+    fileName: 'نام فایل',
+    fileDescription: 'توضیحات فایل',
+    fileTags: 'برچسب فایل',
   },
   fr:{
     insertFile: 'Insérer un fichier',

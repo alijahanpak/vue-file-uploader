@@ -51,24 +51,6 @@
             >
               <template v-slot:activator>
                 <v-list-item-content>
-                  <v-list-item-title>Refs</v-list-item-title>
-                </v-list-item-content>
-              </template>
-              <v-list-item
-                v-for="(ref, i) in refs"
-                :key="i"
-                link
-              >
-                <v-list-item-title style="font-size: 0.9em" @click="$vuetify.goTo(ref[1])" v-text="ref[0]"></v-list-item-title>
-              </v-list-item>
-            </v-list-group>
-
-            <v-list-group
-              sub-group
-              no-action
-            >
-              <template v-slot:activator>
-                <v-list-item-content>
                   <v-list-item-title>Code Examples</v-list-item-title>
                 </v-list-item-content>
               </template>
@@ -139,9 +121,10 @@ export default {
       ['rtlSupport', 9310],
       ['lang', 9700],
       ['btnColor', 10120],
-    ],
-    refs: [
-      ['fileUploader', 10500]
+      ['changeFileName', 10120],
+      ['addFileDescription', 10120],
+      ['addFileTag', 10120],
+      ['tags', 10120],
     ],
     examples: [
       ['Thumbnail', 11250],

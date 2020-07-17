@@ -4,18 +4,19 @@
 &nbsp; Complete and simple file uploader with image compressor in Vue.js
 
 
-+ Choice Theme : Thumbnail, simple, Table
++ Choice Theme : Thumbnail, Simple, Table
++ Add custom fields (Title, Description, Tags, ...)
 + Image compressor
 + Select level for Image compressor
-+ Select file extension
++ Mange file extensions
 + Manage files count
 + Manage files size
 + Multi language support
 + Right to left support
 + ...
-
 &nbsp;
 
+&nbsp;
 # Install
 
 &nbsp;
@@ -69,9 +70,8 @@ $npm install @nuxtjs/vuetify -D
 ### &nbsp;&nbsp;&nbsp;Import handy-uploader to project - Full Example
 
 ``` html
-<vue-file-uploader
-    :setDocumentAttachment="setInsertedFile"
-    :documentAttachment.sync="registryDocFile"
+<handy-uploader
+    :documentAttachment.sync="handyAttachments"
     :fileUploaderType= "'simple'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
@@ -81,7 +81,6 @@ $npm install @nuxtjs/vuetify -D
     :thumb= "false"
     :rtlSupport= "true"
     :lang= "'fr'"
-    ref= "fileUploader"
 >
 </handy-uploader>
 ```
@@ -94,13 +93,8 @@ $npm install @nuxtjs/vuetify -D
             handyUploader,
         },
         data: () => ({
-            registryDocFile: [],
+            handyAttachments: [],
         }),
-        methods:{
-            setInsertedFile(item){
-             this.registryDocFile = item;
-            },
-        }
     }
  </script>
 ```
@@ -120,20 +114,11 @@ $npm install @nuxtjs/vuetify -D
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
  <handy-uploader
-    :setDocumentAttachment="setInsertedFile"
-    :documentAttachment.sync="registryDocFile"
+    :documentAttachment.sync="handyAttachments"
   >
  <handy-uploader>
  ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  method:
-``` js
- methods:{
-     setInsertedFile(item){
-       this.registryDocFile = item;
-     },
-  }
- ```
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Array:
 
 ``` js
@@ -143,7 +128,9 @@ $npm install @nuxtjs/vuetify -D
             base64: 'base64', 
             size: 'file size',
             name: 'file name',
-            format 'file upload format. for example:image/jpeg;base64'
+            format: 'file upload format. for example:image/jpeg;base64'
+            tags: [],
+            description: 'file description'
         }
     }
  ]
@@ -501,38 +488,85 @@ $npm install @nuxtjs/vuetify -D
 ---
 &nbsp;
 
-# Refs
-&nbsp;
-### &nbsp;&nbsp;&nbsp;&nbsp; destroyFileUploader()
-
+### &nbsp;&nbsp;&nbsp;&nbsp; `changeFileName`
 &nbsp;
 
- &nbsp;&nbsp;&nbsp;&nbsp; With this method you can destroy file uploader component.
- 
- ``` html
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Change file name before upload.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Boolean `
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; `false` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
  <handy-uploader
-     :setDocumentAttachment="setInsertedFile"
-     :documentAttachment.sync="registryDocFile"
-     :fileUploaderType= "'thumbnail'"
-     :maxFileSize= "10240"
-     :imageCompressor= "true"
-     :imageCompressLevel= "0.8"
-     :maxFileCount="10"
-     :cardType= "default"
-     :badgeCounter= "true"
-     :rtlSupport= "true"
-     :lang= "'fr'"
-     ref="fileUploader"
- >
- </handy-uploader>
+    :changeFileName= "true"
+  >
+ <handy-uploader>
  ```
-&nbsp;&nbsp;&nbsp;&nbsp; Use `ref` in component. similar to above example. then call this method 
-``` js
- this.refs.fileUploader.destroyFileUploader();
-```
 
 ---
 &nbsp;
+
+### &nbsp;&nbsp;&nbsp;&nbsp; `addFileDescription`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add file Description before upload.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Boolean `
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; `false` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :addFileDescription= "true"
+  >
+ <handy-uploader>
+ ```
+
+---
+&nbsp;
+
+### &nbsp;&nbsp;&nbsp;&nbsp; `addFileTag`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add file tags before upload.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Boolean `
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; `false` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :addFileTag= "true"
+  >
+ <handy-uploader>
+ ```
+
+---
+&nbsp;
+
+### &nbsp;&nbsp;&nbsp;&nbsp; `tags`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Array of file tags.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Array ` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :tags= "['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']"
+  >
+ <handy-uploader>
+ ```
+
+---
+&nbsp;
+
+
 
 # Code Examples
 &nbsp;
@@ -540,41 +574,36 @@ $npm install @nuxtjs/vuetify -D
 
 ``` html
 <handy-uploader
-    :setDocumentAttachment="setInsertedFile"
-    :documentAttachment.sync="registryDocFile"
+    :documentAttachment.sync="handyAttachments"
     :fileUploaderType= "'thumbnail'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
     :imageCompressLevel= "0.8"
     :maxFileCount="10"
     :badgeCounter= "true"
-    :rtlSupport= "true"
-    :lang= "'fr'"
-    ref="fileUploader"
+    :changeFileName="true"
+    :addFileDescription="true"
+    :addFileTag="true"
+    :tags="tags"
 >
 </vue-file-uploader>
 ```
 
 ``` js
 <script>
-    import handyUploader from 'vue-file-uploader';
+    import handyUploader from 'handy-uploader/src/components/handyUploader';
     export default {
         components: {
             handyUploader,
         },
         data: () => ({
-            registryDocFile: [],
+            handyAttachments: [],
         }),
-        methods:{
-            setInsertedFile(item){
-             this.registryDocFile = item;
-            },
-        }
     }
  </script>
  ```
 
-&nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
+&nbsp;&nbsp;&nbsp;&nbsp; `handyAttachments` The Array you define for file uploader
 
 &nbsp;
 
@@ -585,8 +614,7 @@ $npm install @nuxtjs/vuetify -D
 
 ``` html
 <vue-file-uploader
-    :setDocumentAttachment="setInsertedFile"
-    :documentAttachment.sync="registryDocFile"
+    :documentAttachment.sync="handyAttachments"
     :fileUploaderType= "'simple'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
@@ -594,33 +622,29 @@ $npm install @nuxtjs/vuetify -D
     :maxFileCount= "10"
     :badgeCounter= "true"
     :thumb= "false"
-    :rtlSupport= "true"
-    :lang= "'fr'"
-    ref= "fileUploader"
+    :changeFileName="true"
+    :addFileDescription="true"
+    :addFileTag="true"
+    :tags="tags"
 >
 </handy-uploader>
 ```
 
 ``` js
 <script>
-    import handyUploader from 'handy-uploader';
+    import handyUploader from 'handy-uploader/src/components/handyUploader';
     export default {
         components: {
             handyUploader,
         },
         data: () => ({
-            registryDocFile: [],
+            handyAttachments: [],
         }),
-        methods:{
-            setInsertedFile(item){
-             this.registryDocFile = item;
-            },
-        }
     }
  </script>
  ```
 
-&nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
+&nbsp;&nbsp;&nbsp;&nbsp; `handyAttachments` The Array you define for file uploader
 
 &nbsp;
 
@@ -631,8 +655,7 @@ $npm install @nuxtjs/vuetify -D
 
 ``` html
 <handy-uploader
-    :setDocumentAttachment="setInsertedFile"
-    :documentAttachment.sync="registryDocFile"
+    :documentAttachment.sync="handyAttachments"
     :fileUploaderType= "'table'"
     :maxFileSize= "10240"
     :imageCompressor= "true"
@@ -643,22 +666,23 @@ $npm install @nuxtjs/vuetify -D
     :tableFixedHeader= "true"
     :tableHeight= "400"
     :tableThumbColumn= "true"
-    :lang.sync= "'fr'"
-    :rtlSupport= "true"
-    ref="fileUploader"
+    :changeFileName="true"
+    :addFileDescription="true"
+    :addFileTag="true"
+    :tags="tags"
 >
 </handy-uploader>
 ```
 
 ``` js
 <script>
-    import handyUploader from 'handy-uploader';
+    import handyUploader from 'handy-uploader/src/components/handyUploader';
     export default {
         components: {
             handyUploader,
         },
         data: () => ({
-            registryDocFile: [],
+            handyAttachments: [],
         }),
         methods:{
             setInsertedFile(item){
@@ -669,4 +693,4 @@ $npm install @nuxtjs/vuetify -D
  </script>
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp; `registryDocFile` The Array you define for file uploader
+&nbsp;&nbsp;&nbsp;&nbsp; `handyAttachments` The Array you define for file uploader

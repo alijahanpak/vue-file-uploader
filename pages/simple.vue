@@ -18,8 +18,7 @@
       </v-col>
       <v-col cols="12" lg="12" md="12" xs="12">
         <file-uploader
-          :setDocumentAttachment="setInsertedFile"
-          v-model:documentAttachment="registryDocFile"
+          :documentAttachment.sync="documentAttachment"
           :fileAccept="fileExtensions"
           :maxFileSize.sync= "maxFileSizeChange"
           :imageCompressor.sync= "imageCompressorState"
@@ -165,7 +164,7 @@ export default {
     fileUploader,
   },
   data: () => ({
-    registryDocFile: [],
+    documentAttachment: [],
     optionDialog: false,
     selectedCardType: 0,
     cardType: '',
@@ -179,7 +178,7 @@ export default {
     thumbState: true,
     selectedLanguage: 0,
     setLang: 'en',
-    tags:['foo', 'bar', 'fizz', 'buzz']
+    tags: ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']
   }),
   watch: {
     selectedCardType: function (val) {
@@ -211,11 +210,6 @@ export default {
     },
   },
   methods:{
-    setInsertedFile(item){
-      this.registryDocFile = item;
-      console.log(JSON.stringify(this.registryDocFile));
-    },
-
     setCardType(){
       switch (this.selectedCardType) {
         case 0 :

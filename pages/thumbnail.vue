@@ -170,7 +170,7 @@ export default {
     fileExtensions: 'image/png,image/gif,image/jpeg,image/webp',
     selectedLanguage: 0,
     setLang: 'en',
-    tags:['foo', 'bar', 'fizz', 'buzz']
+    tags: ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']
   }),
   watch: {
     selectedCardType: function () {

@@ -52,7 +52,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'handy-uploader'
+      title: 'Handy Uploader'
     }
   },
   methods: {
