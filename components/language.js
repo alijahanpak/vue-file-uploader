@@ -80,6 +80,9 @@ export default{
     },
     maxSizeAlert: 'La taille maximale du fichier est',
     maxFileCountAlert: 'Le nombre maximal de fichiers est',
+    fileName: 'Nom de fichier',
+    fileDescription: 'description du fichier',
+    fileTags: 'Balises de fichier',
   },
   ch:{
     insertFile: '插入档案',
@@ -105,6 +108,9 @@ export default{
     },
     maxSizeAlert: '档案大小上限为',
     maxFileCountAlert: '现“最大文件数”为',
+    fileName: '文档名称',
+    fileDescription: '文件描述',
+    fileTags: '文件标签',
   },
   ar:{
     insertFile: 'إدراج ملف',
@@ -130,5 +136,8 @@ export default{
     },
     maxSizeAlert: 'الحجم الأقصى للملف هو',
     maxFileCountAlert: 'الحد الأقصى لعدد الملفات هو',
+    fileName: 'اسم الملف',
+    fileDescription: 'وصف الملف',
+    fileTags: 'علامات الملف',
   },
 }

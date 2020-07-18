@@ -21,7 +21,7 @@
           <v-btn :color="btnColor" @click="openInputDocumentModal"> {{selectedLang[lang].insertFile}} </v-btn>
         </template>
         <v-row v-if="fileUploaderType === 'simple'">
-          <v-col v-for="(attachment, index) in documentAttachment" :key="`attachment-${index}`" cols="12" md="4" xs="12">
+          <v-col v-for="(attachment, index) in documentAttachment" :key="`attachment-${index}`" cols="12" :md="cols" xs="12">
             <v-card
               :shaped="shaped"
               :outlined="outlined"
@@ -323,7 +323,7 @@
             <v-file-input v-if="fileAccept !== ''" multiple :accept="fileAccept" chip v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
             <v-file-input v-else multiple v-model="tempAttachment" :label="selectedLang[lang].insertNewFile"></v-file-input>
             <template>
-              <v-expansion-panels>
+              <v-expansion-panels v-if="addFileTag || addFileDescription || changeFileName">
                 <v-expansion-panel
                   v-for="attachment in tempAttachmentChanged"
                 >
@@ -540,6 +540,13 @@
       tags: {
         type: Array,
       },
+      /**
+       * Change count of columns
+       */
+      cols: {
+        type: Number,
+        default: 4
+      },
     },
     data: () => ({
       insertDocumentDialog: false,
@@ -596,6 +603,15 @@
       },
       thumb : function() {
         this.$emit('update:thumb', this.thumb);
+      },
+      changeFileName : function() {
+        this.$emit('update:changeFileName', this.changeFileName);
+      },
+      addFileDescription : function() {
+        this.$emit('update:addFileDescription', this.addFileDescription);
+      },
+      addFileTag : function() {
+        this.$emit('update:addFileTag', this.addFileTag);
       },
       tableThumbColumn : function() {
         this.$emit('update:tableThumbColumn', this.tableThumbColumn);
@@ -745,7 +761,7 @@
               file.file=tempFile;
               this.registryDocFile.push(file);
               this.$emit('update:documentAttachment' , this.registryDocFile);
-              console.log(JSON.stringify(this.registryDocFile));
+              //console.log(JSON.stringify(this.registryDocFile));
             }
           }
           else {

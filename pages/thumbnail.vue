@@ -28,9 +28,9 @@
           :cardType.sync= "cardType"
           :badgeCounter.sync= "badgeCounterState"
           :lang.sync= "setLang"
-          :changeFileName="true"
-          :addFileDescription="true"
-          :addFileTag="true"
+          :changeFileName.sync="changeFileNameState"
+          :addFileDescription.sync="addFileDescriptionState"
+          :addFileTag.sync="addFileTagState"
           :tags="tags"
           ref="fileUploader"
         >
@@ -83,6 +83,24 @@
 
                   <v-chip>TILE</v-chip>
                 </v-chip-group>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="changeFileNameState"
+                  :label="`Change file name : ${changeFileNameState.toString()}`"
+                ></v-switch>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="addFileDescriptionState"
+                  :label="`Add file description : ${addFileDescriptionState.toString()}`"
+                ></v-switch>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="addFileTagState"
+                  :label="`Add file tags : ${addFileTagState.toString()}`"
+                ></v-switch>
               </v-col>
               <v-col cols="12" md="12" xs="12">
                 <v-text-field
@@ -170,6 +188,9 @@ export default {
     fileExtensions: 'image/png,image/gif,image/jpeg,image/webp',
     selectedLanguage: 0,
     setLang: 'en',
+    changeFileNameState: true,
+    addFileDescriptionState: true,
+    addFileTagState: true,
     tags: ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']
   }),
   watch: {
@@ -193,6 +214,15 @@ export default {
     },
     fileExtensions : function () {
       this.fileAccept = this.fileExtensions;
+    },
+    changeFileNameState : function () {
+      this.changeFileName = this.changeFileNameState;
+    },
+    addFileDescriptionState : function () {
+      this.addFileDescription = this.addFileDescriptionState;
+    },
+    addFileTagState : function () {
+      this.addFileTag = this.addFileTagState;
     },
     selectedLanguage: function () {
       this.setLanguage()

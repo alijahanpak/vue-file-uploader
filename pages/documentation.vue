@@ -125,6 +125,7 @@ export default {
       ['addFileDescription', 10120],
       ['addFileTag', 10120],
       ['tags', 10120],
+      ['cols', 10120],
     ],
     examples: [
       ['Thumbnail', 11250],

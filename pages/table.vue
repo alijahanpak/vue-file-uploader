@@ -31,9 +31,9 @@
           :tableHeight.sync= "tableHeightChange"
           :tableThumbColumn.sync= "tableThumbColumnState"
           :lang.sync= "setLang"
-          changeFileName="true"
-          :addFileDescription="true"
-          :addFileTag="true"
+          :changeFileName.sync="changeFileNameState"
+          :addFileDescription.sync="addFileDescriptionState"
+          :addFileTag.sync="addFileTagState"
           :tags="tags"
           ref="fileUploader"
         >
@@ -68,6 +68,18 @@
 
                   <v-chip>Arabic</v-chip>
                 </v-chip-group>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="changeFileNameState"
+                  :label="`Change file name : ${changeFileNameState.toString()}`"
+                ></v-switch>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="addFileDescriptionState"
+                  :label="`Add file description : ${addFileDescriptionState.toString()}`"
+                ></v-switch>
               </v-col>
               <v-col cols="12" md="12" xs="12">
                 <v-switch
@@ -184,6 +196,9 @@
       tableHeightChange: 350,
       selectedLanguage: 0,
       setLang: 'en',
+      changeFileNameState: true,
+      addFileDescriptionState: true,
+      addFileTagState: true,
       tags:['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']
     }),
     watch: {
@@ -219,6 +234,15 @@
       },
       tableHeightChange : function () {
         this.tableHeight = this.tableHeightChange;
+      },
+      changeFileNameState : function () {
+        this.changeFileName = this.changeFileNameState;
+      },
+      addFileDescriptionState : function () {
+        this.addFileDescription = this.addFileDescriptionState;
+      },
+      addFileTagState : function () {
+        this.addFileTag = this.addFileTagState;
       },
       selectedLanguage: function () {
         this.setLanguage()

@@ -79,8 +79,10 @@ $npm install @nuxtjs/vuetify -D
     :maxFileCount= "10"
     :badgeCounter= "true"
     :thumb= "false"
-    :rtlSupport= "true"
-    :lang= "'fr'"
+    :changeFileName="true"
+    :addFileDescription="true"
+    :addFileTag="true"
+    :tags= "['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']"
 >
 </handy-uploader>
 ```
@@ -287,7 +289,7 @@ $npm install @nuxtjs/vuetify -D
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
  <handy-uploader
-    :maxFileSize= "1024"
+    :maxFileSize= "10240"
   >
  <handy-uploader>
  ```
@@ -362,7 +364,7 @@ $npm install @nuxtjs/vuetify -D
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
  <handy-uploader
-    :tableThumbColumn= "true"
+    :tableThumbColumn= "false"
   >
  <handy-uploader>
  ```
@@ -381,7 +383,7 @@ $npm install @nuxtjs/vuetify -D
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
  <handy-uploader
-    :tableFixedHeader= "true"
+    :tableFixedHeader= "false"
   >
  <handy-uploader>
  ```
@@ -461,7 +463,7 @@ $npm install @nuxtjs/vuetify -D
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
  <handy-uploader
-    :lang= "fa"
+    :lang= "'fa'"
   >
  <handy-uploader>
  ```
@@ -566,6 +568,25 @@ $npm install @nuxtjs/vuetify -D
 ---
 &nbsp;
 
+### &nbsp;&nbsp;&nbsp;&nbsp; `cols`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Change count of columns.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Number ` 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; ` 4 ` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :cols= "6"
+  >
+ <handy-uploader>
+ ```
+
+---
+&nbsp;
+
 
 
 # Code Examples
@@ -584,7 +605,7 @@ $npm install @nuxtjs/vuetify -D
     :changeFileName="true"
     :addFileDescription="true"
     :addFileTag="true"
-    :tags="tags"
+    :tags= "['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']"
 >
 </vue-file-uploader>
 ```
@@ -625,7 +646,7 @@ $npm install @nuxtjs/vuetify -D
     :changeFileName="true"
     :addFileDescription="true"
     :addFileTag="true"
-    :tags="tags"
+    :tags= "['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']"
 >
 </handy-uploader>
 ```
@@ -669,7 +690,7 @@ $npm install @nuxtjs/vuetify -D
     :changeFileName="true"
     :addFileDescription="true"
     :addFileTag="true"
-    :tags="tags"
+    :tags= "['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']"
 >
 </handy-uploader>
 ```
@@ -684,11 +705,6 @@ $npm install @nuxtjs/vuetify -D
         data: () => ({
             handyAttachments: [],
         }),
-        methods:{
-            setInsertedFile(item){
-             this.registryDocFile = item;
-            },
-        }
     }
  </script>
 ```
