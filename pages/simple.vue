@@ -33,7 +33,6 @@
           :addFileDescription.sync="addFileDescriptionState"
           :addFileTag.sync="addFileTagState"
           :tags="tags"
-          :cols="3"
           ref="fileUploader"
         >
         </file-uploader>

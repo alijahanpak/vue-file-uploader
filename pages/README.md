@@ -317,7 +317,7 @@ $npm install @nuxtjs/vuetify -D
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
 ``` html
  <handy-uploader
-    :maxFileSize= "5"
+    :maxFileCount= "5"
   >
  <handy-uploader>
  ```
@@ -326,7 +326,7 @@ $npm install @nuxtjs/vuetify -D
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
 ``` html
  <handy-uploader
-    :maxFileSize.sync= "10"
+    :maxFileCount.sync= "10"
   >
  <handy-uploader
  ```
