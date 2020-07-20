@@ -1,7 +1,7 @@
 {
   "name": "vue-file-uploader",
   "version": "1.0.0",
-  "description": "Complete and simple file uploader with image compressor in Vue.js",
+  "description": "Complete and simple file uploader with image compressor in Vue.js. ",
   "author": "Ali Jahanapak",
   "private": true,
   "scripts": {

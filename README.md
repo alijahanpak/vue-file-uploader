@@ -14,6 +14,8 @@
 + Manage files size
 + Multi language support
 + Right to left support
++ Multi file upload
++ Responsive
 + ...
 
 ## Examples

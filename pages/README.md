@@ -41,10 +41,10 @@ $npm install @nuxtjs/vuetify -D
 
 ``` js
 // nuxt.config.js
-{
+
   buildModules: [
     '@nuxtjs/vuetify',
-}
+    ]
 ```
 
 
@@ -127,9 +127,9 @@ $npm install @nuxtjs/vuetify -D
 [
     { 
         file: {
-            base64: 'base64', 
-            size: 'file size',
             name: 'file name',
+            size: 'file size',
+            base64: 'base64', 
             format: 'file upload format. for example:image/jpeg;base64'
             tags: [],
             description: 'file description'
@@ -197,8 +197,6 @@ $npm install @nuxtjs/vuetify -D
  <handy-uploader>
  ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
-
 
 ---
 &nbsp;
@@ -220,8 +218,6 @@ $npm install @nuxtjs/vuetify -D
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `Important: ` If don`t send fileAccept, file uploader accept all file formats.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
-
 
 
 ---
@@ -230,7 +226,7 @@ $npm install @nuxtjs/vuetify -D
 ### &nbsp;&nbsp;&nbsp;&nbsp; `imageCompressor`
 &nbsp;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vue file uploader, Uses the Browser's native [canvas.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) API to do the compression work, which means it is lossy compression. General use this to precompress a client image file before upload it.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; handy-uploader, Uses the Browser's native [canvas.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) API to do the compression work, which means it is lossy compression. General use this to precompress a client image file before upload it.
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Boolean `
 
@@ -240,17 +236,9 @@ $npm install @nuxtjs/vuetify -D
 ``` html
  <handy-uploader
     :imageCompressor= "true"
+   >
  <handy-uploader>
  ```
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
-``` html
- <handy-uploader
-   :imageCompressor.sync= "true"
-  >
- <handy-uploader>
- ```
-
 
 ---
 &nbsp;
@@ -272,7 +260,6 @@ $npm install @nuxtjs/vuetify -D
  <handy-uploader>
  ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding.
 
 ---
 &nbsp;
@@ -290,14 +277,6 @@ $npm install @nuxtjs/vuetify -D
 ``` html
  <handy-uploader
     :maxFileSize= "10240"
-  >
- <handy-uploader>
- ```
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
-``` html
- <handy-uploader
-    :maxFileSize.sync= "10240"
   >
  <handy-uploader>
  ```
@@ -323,13 +302,6 @@ $npm install @nuxtjs/vuetify -D
  ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you dont send maxFileCount, You can upload files without restrictions.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; you can use `sync` to enable tow-way-binding. get more: [.sync Modifier](https://vuejs.org/v2/guide/components-custom-events.html#sync-Modifier)
-``` html
- <handy-uploader
-    :maxFileCount.sync= "10"
-  >
- <handy-uploader
- ```
 ---
 &nbsp;
 
