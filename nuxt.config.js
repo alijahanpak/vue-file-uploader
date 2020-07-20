@@ -10,7 +10,7 @@ export default {
     fallback: true
   },
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
+    titleTemplate: 'Handy Uploader',
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },

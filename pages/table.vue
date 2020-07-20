@@ -18,8 +18,7 @@
       </v-col>
       <v-col cols="12" lg="12" md="12" xs="12">
         <file-uploader
-          :setDocumentAttachment="setInsertedFile"
-          v-model:documentAttachment="registryDocFile"
+          :documentAttachment.sync="documentAttachment"
           :fileAccept="fileExtensions"
           :maxFileSize.sync= "maxFileSizeChange"
           :imageCompressor.sync= "imageCompressorState"
@@ -32,6 +31,10 @@
           :tableHeight.sync= "tableHeightChange"
           :tableThumbColumn.sync= "tableThumbColumnState"
           :lang.sync= "setLang"
+          :changeFileName.sync="changeFileNameState"
+          :addFileDescription.sync="addFileDescriptionState"
+          :addFileTag.sync="addFileTagState"
+          :tags="tags"
           ref="fileUploader"
         >
         </file-uploader>
@@ -65,6 +68,18 @@
 
                   <v-chip>Arabic</v-chip>
                 </v-chip-group>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="changeFileNameState"
+                  :label="`Change file name : ${changeFileNameState.toString()}`"
+                ></v-switch>
+              </v-col>
+              <v-col cols="12" md="4" xs="12">
+                <v-switch
+                  v-model="addFileDescriptionState"
+                  :label="`Add file description : ${addFileDescriptionState.toString()}`"
+                ></v-switch>
               </v-col>
               <v-col cols="12" md="12" xs="12">
                 <v-switch
@@ -164,7 +179,7 @@
       fileUploader,
     },
     data: () => ({
-      registryDocFile: [],
+      documentAttachment: [],
       optionDialog: false,
       selectedCardType: 0,
       cardType: '',
@@ -181,49 +196,59 @@
       tableHeightChange: 350,
       selectedLanguage: 0,
       setLang: 'en',
+      changeFileNameState: true,
+      addFileDescriptionState: true,
+      addFileTagState: true,
+      tags:['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']
     }),
     watch: {
-      selectedCardType: function (val) {
+      selectedCardType: function () {
         this.setCardType()
       },
-      badgeCounterState : function (val) {
+      badgeCounterState : function () {
         this.badgeCounter = this.badgeCounterState;
       },
-      maxFileCountChange : function (val) {
+      maxFileCountChange : function () {
         this.maxFileCount = this.maxFileCountChange;
       },
-      maxFileSizeChange : function (val) {
+      maxFileSizeChange : function () {
         this.maxFileSize = Number(this.maxFileSizeChange);
       },
-      imageCompressorState : function (val) {
+      imageCompressorState : function () {
         this.imageCompressor = this.imageCompressorState;
       },
-      imageCompressLevelChange : function (val) {
+      imageCompressLevelChange : function () {
         this.imageCompressLevel = this.imageCompressLevelChange;
       },
-      fileExtensions : function (val) {
+      fileExtensions : function () {
         this.fileAccept = this.fileExtensions;
       },
-      thumbState : function (val) {
+      thumbState : function () {
         this.thumb = this.thumbState;
       },
-      tableThumbColumnState : function (val) {
+      tableThumbColumnState : function () {
         this.tableThumbColumn = this.tableThumbColumnState;
       },
-      tableFixedHeaderStatus : function (val) {
+      tableFixedHeaderStatus : function () {
         this.tableFixedHeader = this.tableFixedHeaderStatus;
       },
-      tableHeightChange : function (val) {
+      tableHeightChange : function () {
         this.tableHeight = this.tableHeightChange;
       },
-      selectedLanguage: function (val) {
+      changeFileNameState : function () {
+        this.changeFileName = this.changeFileNameState;
+      },
+      addFileDescriptionState : function () {
+        this.addFileDescription = this.addFileDescriptionState;
+      },
+      addFileTagState : function () {
+        this.addFileTag = this.addFileTagState;
+      },
+      selectedLanguage: function () {
         this.setLanguage()
       },
     },
     methods:{
-      setInsertedFile(item){
-        this.registryDocFile = item;
-      },
       setLanguage() {
         switch (this.selectedLanguage) {
           case 0 :

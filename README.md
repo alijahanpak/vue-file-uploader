@@ -5,10 +5,11 @@
 
 > Complete and simple file uploader with image compressor in Vue.js
 
-+ Choice Theme : Thumbnail, simple, Table
++ Choice Theme : Thumbnail, Simple, Table
++ Add custom fields (Title, Description, Tags, ...)
 + Image compressor
 + Select level for Image compressor
-+ Select file extension
++ Mange file extensions
 + Manage files count
 + Manage files size
 + Multi language support
