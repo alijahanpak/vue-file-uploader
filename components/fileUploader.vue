@@ -110,7 +110,7 @@
                       active-class="primary--text"
                       style="padding: 8px"
                     >
-                        <v-chip v-for="tag in attachment.file.tags" style="margin: 5px">
+                        <v-chip v-for="(tag, index) in attachment.file.tags" :key="`attachment-${index}`" style="margin: 5px">
                           {{tag}}
                         </v-chip>
                     </v-chip-group>
@@ -124,7 +124,7 @@
           </v-col>
         </v-row>
         <v-row v-else-if="fileUploaderType === 'thumbnail'">
-          <v-col v-for="(attachment, index) in documentAttachment" :key="attachment.id" cols="12" md="4" xs="12">
+          <v-col v-for="(attachment, index) in documentAttachment" :key="`attachment-${index}`" cols="12" md="4" xs="12">
             <v-card
               :shaped="shaped"
               :outlined="outlined"
@@ -222,7 +222,7 @@
                       active-class="primary--text"
                       style="padding: 8px"
                     >
-                      <v-chip v-for="tag in attachment.file.tags" style="margin: 5px">
+                      <v-chip v-for="(tag,index) in attachment.file.tags" :key="`attachment-${index}`" style="margin: 5px">
                         {{tag}}
                       </v-chip>
                     </v-chip-group>
@@ -249,7 +249,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(attachment, index) in documentAttachment" :key="attachment.id">
+                <tr v-for="(attachment, index) in documentAttachment" :key="`attachment-${index}`">
                   <td v-if="tableThumbColumn">
                     <template v-if="attachment.file.name.split('.').pop().toLowerCase() == 'jpg' || attachment.file.name.split('.').pop().toLowerCase() == 'jpeg' || attachment.file.name.split('.').pop().toLowerCase() == 'png' || attachment.file.name.split('.').pop().toLowerCase() == 'tif' || attachment.file.name.split('.').pop().toLowerCase() == 'bmp'">
                       <v-img
@@ -327,7 +327,7 @@
             <template>
               <v-expansion-panels v-if="addFileTag || addFileDescription || changeFileName">
                 <v-expansion-panel
-                  v-for="attachment in tempAttachmentChanged"
+                  v-for="(attachment, index) in tempAttachmentChanged" :key="`attachment-${index}`"
                 >
                   <v-expansion-panel-header>{{attachment.name}}</v-expansion-panel-header>
                   <v-expansion-panel-content>
@@ -388,7 +388,7 @@
                 class="mx-auto"
                 tile
               >
-                <v-list-item v-for="attachment in tempAttachmentChanged" style="border-bottom: 1px solid #E0E0E0">
+                <v-list-item v-for="(attachment, index) in tempAttachmentChanged" :key="`attachment-${index}`" style="border-bottom: 1px solid #E0E0E0">
                   <v-list-item-content>
                     <v-list-item-title>
                       <v-icon  v-if="attachment.format == 'pdf'" size="30" file-word-outline color="red darken-1">mdi-file-pdf-outline</v-icon>
@@ -597,6 +597,13 @@
         type: Number,
         default: 4
       },
+      /**
+       * Define Custom language for uploader
+       */
+      customLang: {
+        type: Object,
+        default: null
+      },
     },
     data: () => ({
       insertDocumentDialog: false,
@@ -694,7 +701,10 @@
     },
     methods: {
       setLang(){
-        this.selectedLang= languages;
+        if( this.customLang !== null)
+          this.selectedLang= this.customLang;
+        else
+          this.selectedLang= languages;
       },
       changeRTL () {
         this.$vuetify.rtl = true

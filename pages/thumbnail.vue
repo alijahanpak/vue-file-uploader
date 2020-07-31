@@ -27,11 +27,11 @@
           :maxFileCount.sync="maxFileCountChange"
           :cardType.sync= "cardType"
           :badgeCounter.sync= "badgeCounterState"
-          :lang.sync= "setLang"
           :changeFileName.sync="changeFileNameState"
           :addFileDescription.sync="addFileDescriptionState"
           :addFileTag.sync="addFileTagState"
           :tags="tags"
+          :lang.sync= "setLang"
           ref="fileUploader"
         >
         </file-uploader>
@@ -191,7 +191,38 @@ export default {
     changeFileNameState: true,
     addFileDescriptionState: true,
     addFileTagState: true,
-    tags: ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6']
+    tags: ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4', 'Tag 5', 'Tag 6'],
+    customLang : {
+      custom : {
+        insertFile: 'Insert File1',
+        insertNewFile: 'Insert New File1',
+        add: 'Add',
+        delete: 'Delete',
+        deleteDialog: {
+          message: 'Are you sure you want to delete the file?',
+          cancel: 'cancel',
+        },
+        table: {
+          thumb: 'Thumb',
+          name: 'Name',
+          size: 'Size',
+          tags: 'tags',
+          action: {
+            action: 'Action',
+            deleteTooltip: 'Delete'
+          }
+        },
+        size: {
+          kb: 'KB',
+          mb: 'MB',
+        },
+        maxFileSizeAlert: 'Max file Size is',
+        maxFileCountAlert: 'Max file Count is',
+        fileName: 'File Name',
+        fileDescription: 'File Description',
+        fileTags: 'File Tags',
+      }
+    },
   }),
   watch: {
     selectedCardType: function () {
