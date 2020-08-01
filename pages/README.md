@@ -11,8 +11,11 @@
 + Mange file extensions
 + Manage files count
 + Manage files size
-+ Multi language support
++ Multi languages support
++ Use custom language
 + Right to left support
++ Multi file upload
++ Responsive
 + ...
 &nbsp;
 
@@ -438,6 +441,72 @@ $npm install @nuxtjs/vuetify -D
     :lang= "'fa'"
   >
  <handy-uploader>
+ ```
+---
+&nbsp;
+
+### &nbsp;&nbsp;&nbsp;&nbsp; `customLang`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Define Custom language for uploader.
+
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Object `
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; `null` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :lang= "'custom'"
+    :customLang= "customLang"
+  >
+ <handy-uploader>
+ ```
+
+``` js
+<script>
+    import handyUploader from 'handy-uploader/src/components/handyUploader';
+    export default {
+        components: {
+            handyUploader,
+        },
+        data: () => ({
+            handyAttachments: [],
+            customLang : {
+              custom : {
+                insertFile: 'Insert File',
+                insertNewFile: 'Insert New File1,
+                add: 'Add',
+                delete: 'Delete',
+                deleteDialog: {
+                  message: 'Are you sure you want to delete the file?',
+                  cancel: 'cancel',
+                },
+                table: {
+                  thumb: 'Thumb',
+                  name: 'Name',
+                  size: 'Size',
+                  tags: 'tags',
+                  action: {
+                    action: 'Action',
+                    deleteTooltip: 'Delete'
+                  }
+                },
+                size: {
+                  kb: 'KB',
+                  mb: 'MB',
+                },
+                maxFileSizeAlert: 'Max file Size is',
+                maxFileCountAlert: 'Max file Count is',
+                fileName: 'File Name',
+                fileDescription: 'File Description',
+                fileTags: 'File Tags',
+              }
+            },
+        }),
+    }
+ </script>
  ```
 ---
 &nbsp;
