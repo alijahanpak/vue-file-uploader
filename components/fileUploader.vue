@@ -200,6 +200,12 @@
                   </template>
                   <span class="BYekan">{{selectedLang[lang].delete}}</span>
                 </v-tooltip>
+                <v-tooltip right>
+                  <template v-slot:activator="{ on }">
+                    <v-btn text fab v-on="on"  @click="openDocumentDialogEdit(attachment)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
+                  </template>
+                  <span class="BYekan">{{selectedLang[lang].edit}}</span>
+                </v-tooltip>
 
                 <v-spacer></v-spacer>
 
@@ -899,6 +905,12 @@
           obj.base64= this.readerFile;
           this.tempAttachmentChanged.push(obj)
         }
+      },
+
+      openDocumentDialogEdit(item){
+        this.insertDocumentDialog= true;
+        this.tempAttachmentChanged= item
+        console.log('tempAttachmentChanged =>>>>' +JSON.stringify(this.tempAttachmentChanged));
       },
 
       getBinaryFile(attachment) {

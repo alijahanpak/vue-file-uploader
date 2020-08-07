@@ -4,6 +4,7 @@ export default{
     insertNewFile: 'Insert New File',
     add: 'Add',
     delete: 'Delete',
+    edit: 'Edit',
     deleteDialog:{
       message: 'Are you sure you want to delete the file?',
       cancel: 'cancel',
