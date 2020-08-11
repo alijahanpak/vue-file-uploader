@@ -127,11 +127,13 @@ export default {
       ['addFileTag', 11540],
       ['tags', 11900],
       ['cols', 12260],
+      ['editPermission', 12600],
+      ['deletePermission', 12980],
     ],
     examples: [
-      ['Thumbnail', 12620],
-      ['Simple', 13510],
-      ['Table', 14400]
+      ['Thumbnail', 13380],
+      ['Simple', 14280],
+      ['Table', 15140]
     ],
   }),
   computed: {

@@ -84,13 +84,13 @@
               <v-card-actions style="padding: 0">
                 <v-tooltip right>
                   <template v-slot:activator="{ on }">
-                    <v-btn text fab v-on="on"  @click="openDeleteDialog(index , '')"><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
+                    <v-btn v-if="deletePermission" text fab v-on="on"  @click="openDeleteDialog(index , '')"><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
                   </template>
                   <span class="BYekan">{{selectedLang[lang].delete}}</span>
                 </v-tooltip>
                 <v-tooltip right>
                   <template v-slot:activator="{ on }">
-                    <v-btn text fab v-on="on"  @click="openEditDocumentDialog(attachment, index)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
+                    <v-btn v-if="editPermission" text fab v-on="on"  @click="openEditDocumentDialog(attachment, index)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
                   </template>
                   <span class="BYekan">{{selectedLang[lang].edit}}</span>
                 </v-tooltip>
@@ -202,13 +202,13 @@
               <v-card-actions style="padding: 0">
                 <v-tooltip right>
                   <template v-slot:activator="{ on }">
-                    <v-btn text fab v-on="on"  @click="openDeleteDialog(index , '')"><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
+                    <v-btn v-if="deletePermission" text fab v-on="on"  @click="openDeleteDialog(index , '')"><v-icon color="red">mdi-trash-can-outline</v-icon></v-btn>
                   </template>
                   <span class="BYekan">{{selectedLang[lang].delete}}</span>
                 </v-tooltip>
                 <v-tooltip right>
                   <template v-slot:activator="{ on }">
-                    <v-btn text fab v-on="on"  @click="openEditDocumentDialog(attachment, index)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
+                    <v-btn v-if="editPermission" text fab v-on="on"  @click="openEditDocumentDialog(attachment, index)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
                   </template>
                   <span class="BYekan">{{selectedLang[lang].edit}}</span>
                 </v-tooltip>
@@ -311,13 +311,13 @@
                   <td>
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-btn icon color="red" v-on="on" @click="openDeleteDialog(index , '')" ><v-icon>mdi-delete</v-icon></v-btn>
+                        <v-btn v-if="deletePermission" icon color="red" v-on="on" @click="openDeleteDialog(index , '')" ><v-icon>mdi-delete</v-icon></v-btn>
                       </template>
                       <span>{{selectedLang[lang].table.action.deleteTooltip}}</span>
                     </v-tooltip>
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-btn text fab v-on="on"  @click="openEditDocumentDialog(attachment, index)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
+                        <v-btn v-if="editPermission" text fab v-on="on"  @click="openEditDocumentDialog(attachment, index)"><v-icon color="green">mdi-pencil-outline</v-icon></v-btn>
                       </template>
                       <span class="BYekan">{{selectedLang[lang].edit}}</span>
                     </v-tooltip>
@@ -688,6 +688,27 @@
         type: Object,
         default: null
       },
+      /**
+       * Set Insert/Add new file Permission
+       */
+      insertPermission: {
+        type: Boolean,
+        default: true
+      },
+      /**
+       * Set edit Permission
+       */
+      editPermission: {
+        type: Boolean,
+        default: true
+      },
+      /**
+       * Set delete Permission
+       */
+      deletePermission: {
+        type: Boolean,
+        default: true
+      },
     },
     data: () => ({
       insertDocumentDialog: false,
@@ -992,7 +1013,6 @@
         this.attachmentIndex = index;
         this.editDocumentDialog= true;
         this.tempAttachmentChanged= item
-        console.log('tempAttachmentChanged =>>>>' +JSON.stringify(this.tempAttachmentChanged));
       },
 
       editDocument(){

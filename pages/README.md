@@ -12,7 +12,7 @@
 + Manage files count
 + Manage files size
 + Multi languages support
-+ Use custom language
++ Add custom language
 + Right to left support
 + Multi file upload
 + Responsive
@@ -628,6 +628,43 @@ $npm install @nuxtjs/vuetify -D
 ---
 &nbsp;
 
+### &nbsp;&nbsp;&nbsp;&nbsp; `editPermission`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Set edit Permission for edit attachment details.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Boolean ` 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; ` true ` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :editPermission= "false"
+  >
+ <handy-uploader>
+ ```
+
+---
+&nbsp;
+
+### &nbsp;&nbsp;&nbsp;&nbsp; `deletePermission`
+&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Set delete Permission for delete attachment details.
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Type: &nbsp;&nbsp; ` Boolean ` 
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Default: &nbsp;&nbsp; ` true ` 
+
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Usage:
+``` html
+ <handy-uploader
+    :deletePermission= "false"
+  >
+ <handy-uploader>
+ ```
+
+---
+&nbsp;
 
 
 # Code Examples
