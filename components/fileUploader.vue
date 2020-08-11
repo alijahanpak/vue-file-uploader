@@ -888,6 +888,7 @@
               try {
                 this.readerFile = await this.handleUpload(item);
               } catch (e) {
+                console.log(e);
               }
               let fullFileType= this.readerFile.split(";");
               let fileType= fullFileType[0].split(":")
@@ -997,6 +998,7 @@
           try {
             this.readerFile = await this.handleUpload(item);
           } catch (e) {
+            console.log(e);
           }
           let obj= {};
           let name='';
