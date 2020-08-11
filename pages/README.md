@@ -479,6 +479,7 @@ $npm install @nuxtjs/vuetify -D
                 insertNewFile: 'Insert New File1,
                 add: 'Add',
                 delete: 'Delete',
+                edit: 'Edit',
                 deleteDialog: {
                   message: 'Are you sure you want to delete the file?',
                   cancel: 'cancel',
