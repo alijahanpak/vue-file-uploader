@@ -1022,10 +1022,10 @@
         this.editDocumentDialog= false;
       },
 
-      getBinaryFile(attachment) {
+      /*getBinaryFile(attachment) {
         let fileUrl = '/file/' + attachment.file.url;
         window.open(process.env.apiBaseUrl +fileUrl );
-      },
+      },*/
 
       getShowDetailState(index){
         this.showDetailState[index]= !this.showDetailState[index];
