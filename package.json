@@ -17,12 +17,12 @@
     "markdown-it": "^11.0.0",
     "markdown-it-attrs": "^3.0.3",
     "markdown-it-div": "^1.1.0",
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.15.4"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.6.7",
     "@nuxtjs/vuetify": "^1.0.0",
-    "eslint": "^7.21.0",
-    "eslint-plugin-vue": "^7.7.0"
+    "eslint": "^7.23.0",
+    "eslint-plugin-vue": "^7.8.0"
   }
 }

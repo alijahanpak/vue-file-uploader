@@ -26,11 +26,5 @@
         default: 30
       },
     },
-    data: () => ({}),
-    methods: {
-      openInputDocumentModal() {
-        this.$emit('openInputDocumentModal')
-      },
-    }
   }
 </script>
