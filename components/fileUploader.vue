@@ -128,16 +128,11 @@
                           </v-card>
                         </template>
                         <template v-else>
-                          <v-icon  v-if="attachment.format === 'pdf'" size="60" file-word-outline color="red darken-1">mdi-file-pdf-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'doc' || attachment.format === 'docx' || attachment.format === 'odt'" size="60" file-word-outline color="blue darken-1">mdi-file-word-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'jpg' || attachment.format === 'jpeg' || attachment.format === 'png' || attachment.format === 'tif' || attachment.format === 'bmp'" size="60" file-word-outline color="deep-purple darken-1">mdi-file-image-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'xls' || attachment.format === 'xlsx'" size="60" file-word-outline color="teal darken-1">mdi-file-excel-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'pptx' || attachment.format === 'pptm' || attachment.format === 'ppt'" size="60" file-word-outline color="orange darken-3">mdi-file-powerpoint-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'mp4' || attachment.format === 'mov' || attachment.format === 'flv' || attachment.format === 'wmv' || attachment.format === 'avi'" size="60" file-word-outline color="red lighten-1">mdi-file-video-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'dwg' " size="60" file-word-outline color="indigo lighten-2">mdi-file-cad</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'zip' || attachment.format === 'rar' || attachment.format === '7-zip'   " size="60" file-word-outline color="lime lighten-1">mdi-folder-zip-outline</v-icon>
-                          <v-icon  v-else-if="attachment.format === 'txt' " size="60" file-word-outline color="light-green darken-3">mdi-script-text-outline</v-icon>
-                          <v-icon  v-else size="60" file-word-outline color="indigo lighten-1">mdi-file-question-outline</v-icon>
+                          <select-file-icon-type
+                            :file-format="attachment.format"
+                            :size="60"
+                          >
+                          </select-file-icon-type>
                         </template>
                       </v-col>
                     </v-row>
@@ -152,16 +147,10 @@
                 <v-list-item v-for="(attachment, index) in tempAttachmentChanged" :key="`attachment-${index}`" style="border-bottom: 1px solid #E0E0E0">
                   <v-list-item-content>
                     <v-list-item-title>
-                      <v-icon  v-if="attachment.format === 'pdf'" size="30" file-word-outline color="red darken-1">mdi-file-pdf-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'doc' || attachment.format === 'docx' || attachment.format === 'odt'" size="30" file-word-outline color="blue darken-1">mdi-file-word-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'jpg' || attachment.format === 'jpeg' || attachment.format === 'png' || attachment.format === 'tif' || attachment.format === 'bmp'" size="30" file-word-outline color="deep-purple darken-1">mdi-file-image-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'xls' || attachment.format === 'xlsx'" size="30" file-word-outline color="teal darken-1">mdi-file-excel-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'pptx' || attachment.format === 'pptm' || attachment.format === 'ppt'" size="30" file-word-outline color="orange darken-3">mdi-file-powerpoint-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'mp4' || attachment.format === 'mov' || attachment.format === 'flv' || attachment.format === 'wmv' || attachment.format === 'avi'" size="30" file-word-outline color="red lighten-1">mdi-file-video-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'dwg' " size="30" file-word-outline color="indigo lighten-2">mdi-file-cad</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'zip' || attachment.format === 'rar' || attachment.format === '7-zip'   " size="30" file-word-outline color="lime lighten-1">mdi-folder-zip-outline</v-icon>
-                      <v-icon  v-else-if="attachment.format === 'txt' " size="30" file-word-outline color="light-green darken-3">mdi-script-text-outline</v-icon>
-                      <v-icon  v-else size="30" file-word-outline color="indigo lighten-1">mdi-file-question-outline</v-icon>
+                      <select-file-icon-type
+                        :file-format="attachment.format"
+                      >
+                      </select-file-icon-type>
                       {{attachment.name}}.{{attachment.format}}
                     </v-list-item-title>
                   </v-list-item-content>
@@ -220,16 +209,11 @@
                   </v-card>
                 </template>
                 <template v-else>
-                  <v-icon  v-if="attachment.name.split('.').pop().toLowerCase() === 'pdf'" size="60" file-word-outline color="red darken-1">mdi-file-pdf-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'doc' || attachment.format === 'docx' || attachment.format === 'odt'" size="60" file-word-outline color="blue darken-1">mdi-file-word-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'jpg' || attachment.format === 'jpeg' || attachment.format === 'png' || attachment.format === 'tif' || attachment.format === 'bmp'" size="60" file-word-outline color="deep-purple darken-1">mdi-file-image-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'xls' || attachment.format === 'xlsx'" size="60" file-word-outline color="teal darken-1">mdi-file-excel-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'pptx' || attachment.format === 'pptm' || attachment.format === 'ppt'" size="60" file-word-outline color="orange darken-3">mdi-file-powerpoint-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'mp4' || attachment.format === 'mov' || attachment.format === 'flv' || attachment.format === 'wmv' || attachment.format === 'avi'" size="60" file-word-outline color="red lighten-1">mdi-file-video-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'dwg' " size="60" file-word-outline color="indigo lighten-2">mdi-file-cad</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'zip' || attachment.format === 'rar' || attachment.format === '7-zip'   " size="60" file-word-outline color="lime lighten-1">mdi-folder-zip-outline</v-icon>
-                  <v-icon  v-else-if="attachment.format === 'txt' " size="60" file-word-outline color="light-green darken-3">mdi-script-text-outline</v-icon>
-                  <v-icon  v-else size="60" file-word-outline color="indigo lighten-1">mdi-file-question-outline</v-icon>
+                  <select-file-icon-type
+                    :file-format="attachment.format"
+                    :size="60"
+                  >
+                  </select-file-icon-type>
                 </template>
               </v-col>
             </v-row>
@@ -293,6 +277,7 @@
   import SimpleUploader from '@/components/SimpleUploader.vue'
   import ThumbnailUploader from '@/components/ThumbnailUploader.vue'
   import TableUploader from '@/components/TableUploader.vue'
+  import SelectFileIconType from '@/components/SelectFileIconType.vue'
   import languages from "./language";
   export default {
     components: {
@@ -300,6 +285,7 @@
       SimpleUploader,
       ThumbnailUploader,
       TableUploader,
+      SelectFileIconType
     },
     props: {
       /**
