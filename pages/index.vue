@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="section-height" align="center" justify="center">
       <v-col cols="12" lg="12" md="12" xs="12" align="center">
         <v-img src="vue-file-uploader.png" width="200" height="200" class="text-center"></v-img>
         <div class="text-center">
@@ -63,3 +63,9 @@ export default {
   },
 }
 </script>
+
+<style scoped lang="scss">
+  .section-height {
+    height: calc(80vh)
+  }
+</style>
